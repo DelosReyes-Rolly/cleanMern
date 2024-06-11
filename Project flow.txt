@@ -6,7 +6,7 @@ Future thing to do:
 Things to do:
 
  - Database Structure
- - Api
+ - Api (for getting music data)
  - Flow
 
 Flow:
