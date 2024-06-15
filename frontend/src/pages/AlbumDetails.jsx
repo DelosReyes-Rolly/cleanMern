@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import SidebarA from '../components/SidebarA';
 
 const AlbumDetails = () => {
   const [album, setAlbum] = useState(null);
   const [tracks, setTracks] = useState([]);
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchAlbumData = async () => {
@@ -24,17 +25,20 @@ const AlbumDetails = () => {
   if (!album) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{album.name}</h1>
-      <h2>{album.artists.map(artist => artist.name).join(', ')}</h2>
-      <img src={album.images[0].url} alt={album.name} />
-      <ul>
-        {tracks.map(track => (
-          <li key={track.id}>
-            {track.name} - {track.artists.map(artist => artist.name).join(', ')}
-          </li>
-        ))}
-      </ul>
+    <div style={{ background: '#282424' }}>
+      <SidebarA />
+      <div className="leftBody" style={{ marginRight: '20px', color: 'white' }}>
+        <img src={album.images[0].url} alt={album.name} />
+        <h1>{album.name}</h1>
+        <h2>{album.artists.map(artist => artist.name).join(', ')}</h2>
+        <ul>
+          {tracks.map(track => (
+            <li key={track.id}>
+              {track.name} - {track.artists.map(artist => artist.name).join(', ')}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [query, setQuery] = useState('');
-  const [albums, setAlbums] = useState([]);
+  const [query, setQuery] = useState(() => {
+    return ''
+  });
+  const [albums, setAlbums] = useState(() => {
+    return []
+  });
 
   const searchAlbums = async (e) => {
     e.preventDefault();

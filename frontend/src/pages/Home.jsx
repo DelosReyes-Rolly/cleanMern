@@ -1,82 +1,99 @@
-import React from 'react'
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import React, { useEffect, useState } from 'react'
+import '../screen.css';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Grid, Box } from '@mui/material'
+import Sidebar from '../components/SidebarA';
 import { Link } from 'react-router-dom';
-import { GoHome } from "react-icons/go";
-import { CiSearch } from "react-icons/ci";
-import { LuLibrary } from "react-icons/lu";
-import { RxBorderStyle, RxHamburgerMenu } from "react-icons/rx";
 
-const Home = () => {
-  const homeIcon = { color: "white", fontSize: "2em" }
-  const searchIcon = { color: "white", fontSize: "2em" }
-  const libraryIcon = { color: "white", fontSize: "2em" }
-  const profileStyle = { color: 'white', backgroundColor: '#000000', padding: '12px 16px', cursor: 'pointer', borderRadius: '20px', }
-  const headerStyle = { color: 'white',}
-  const [collapsed, setCollapsed] = React.useState(false);
-  const [toggled, setToggled] = React.useState(false);
-  const [broken, setBroken] = React.useState(false);
+const AlbumsDetailsOne = ({ albumId }) => {
+  const profileStyle = { color: 'white', backgroundColor: '#000000', padding: '12px 16px', cursor: 'pointer', borderRadius: '20px', marginLeft: 'auto', order: 2 }
+  const headerStyle = { color: 'white', }
+  const [albums, setAlbum] = useState(null);
+
+  useEffect(() => {
+    const fetchAlbumData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/search/albums?q=${albumId}`);
+        const data = await response.json();
+        setAlbum(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching album data:', error);
+      }
+    };
+
+    fetchAlbumData();
+  }, [albumId]);
+  if (!albums) return <div>Loading...</div>;
   return (
-    <div style={{ background: 'radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%)' }}>
-      <Sidebar
-        backgroundColor="#000000"
-        style={{
-          position: "fixed",
-          height: "100vh",
-        }}
-        collapsed={collapsed}
-        toggled={toggled}
-        onBackdropClick={() => setToggled(false)}
-        onBreakPoint={setBroken}
-        breakPoint="md"
-      >
-        <Menu
-          menuItemStyles={{
-            button: ({ level, active, disabled }) => {
-              if (level === 0) {
-                return {
-                  color: disabled ? "#eee" : "white",
-                  backgroundColor: active ? undefined : "#000000",
-                  "&:hover": {
-                    backgroundColor: "#141212 !important",
-                    color: "white !important",
-                  },
-                };
-              }
-            },
-          }}
-        >
-          <MenuItem active icon={<GoHome style={homeIcon} />} component={<Link to={"/"} style={{ marginTop: "40px", }} />}>Home</MenuItem>
-          <MenuItem icon={<CiSearch style={searchIcon} />}>Search</MenuItem>
-          <MenuItem icon={<LuLibrary style={libraryIcon} />}>Library</MenuItem>
-          <SubMenu defaultOpen label="Playlists">
-            <MenuItem style={{ background: "#0D0C0C", color: "white" }}>Create Playlist</MenuItem>
-            <MenuItem style={{ background: "#0D0C0C", color: "white" }}>Liked Albums</MenuItem>
-            <MenuItem style={{ background: "#0D0C0C", color: "white" }}>Liked Artist</MenuItem>
-          </SubMenu>
-        </Menu>
-      </Sidebar>
-      <div>
-        {broken && (
-          <button className="sb-button" onClick={() => setToggled(!toggled)}>
-            <RxHamburgerMenu />
-          </button>
-        )}
-      </div>
-      <div style={{ marginLeft: "280px", marginRight: '20px', height: "100vh" }}>
-        <div style={headerStyle}>
-        Playlists
-        Pocasts
-        Artist
-        Albums
-        </div>
-        <select className="float-right" style={profileStyle}>
+    <div style={{ background: '#282424' }}>
+      <Sidebar/>
+      <div className="leftBody" style={{ marginRight: '20px', color: 'white' }}>
+        <div style={{ display: 'flex' }}>
+          {/* <select style={profileStyle}>
           <option disabled selected value> Profile name </option>
           <option value="fr">French</option>
-        </select>
+          </select> */}
+          <div style={{ paddingTop: '48px' }}>
+            <Link to={`/`} style={{ paddingRight: '20px' }}>Playlists</Link>
+            <Link to={`/`} style={{ paddingRight: '20px' }}>Podcasts</Link>
+            <Link to={`/`} style={{ paddingRight: '20px' }}>Artist</Link>
+            <Link to={`/`} style={{ paddingRight: '20px' }}>Albums</Link>
+          </div>
+        </div>
+        <div style={{ paddingTop: '40px' }}>
+          <Grid container spacing={2}>
+            {albums.map(album => (
+
+              <Grid item xs={2}>
+                <div key={album.id}>
+                  <Card sx={{ maxWidth: 200 }} style={{ backgroundColor: "#100c0c", color: 'white' }}>
+                    <Link to={`/album/${album.id}`}>
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          height="10"
+                          image={album.images[0].url}
+                          alt={album.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {album.name}
+                          </Typography>
+                          <Typography variant="body2" color="grey">
+                            {album.artists.map(artist => artist.name)}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Link>
+                    <CardActions style={{ backgroundColor: "black" }}>
+                      <Button size="small" color="primary">
+                        Share
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </div>
+              </Grid>
+
+            ))}
+          </Grid>
+        </div>
       </div>
     </div>
 
   )
 }
+
+const Home = () => {
+  return (
+    <div>
+      <AlbumsDetailsOne albumId="Songs About Jane" />
+    </div>
+  );
+};
 
 export default Home
