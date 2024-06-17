@@ -44,7 +44,7 @@ const SidebarA = () => {
                     }}
                 >
                     <MenuItem active icon={<GoHome style={homeIcon} />} component={<Link to={"/"} style={{ marginTop: "40px", }} />}>Home</MenuItem>
-                    <MenuItem icon={<CiSearch style={searchIcon} />}>Search</MenuItem>
+                    <MenuItem icon={<CiSearch style={searchIcon}/>} component={<Link to={"/search"}/>}>Search</MenuItem>
                     <MenuItem icon={<LuLibrary style={libraryIcon} />}>Library</MenuItem>
                     <SubMenu defaultOpen label="Playlists">
                         <MenuItem style={{ background: "#181414", color: "white" }}>Create Playlist</MenuItem>
@@ -55,8 +55,8 @@ const SidebarA = () => {
             </Sidebar>
             <div>
                 {broken && (
-                    <button className="sb-button" onClick={() => setToggled(!toggled)}>
-                        <RxHamburgerMenu style={{ color: 'white' }} />
+                    <button className='absolute top-6 px-4 py-1' onClick={() => setToggled(!toggled)}>
+                        <RxHamburgerMenu style={{ color: 'white', fontSize: '20px' }} />
                     </button>
                 )}
             </div>

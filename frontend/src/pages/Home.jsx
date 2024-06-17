@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '../screen.css';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import { Grid, Box } from '@mui/material'
 import Sidebar from '../components/SidebarA';
 import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 const AlbumsDetailsOne = ({ albumId }) => {
-  const profileStyle = { color: 'white', backgroundColor: '#000000', padding: '12px 16px', cursor: 'pointer', borderRadius: '20px', marginLeft: 'auto', order: 2 }
-  const headerStyle = { color: 'white', }
   const [albums, setAlbum] = useState(null);
 
   useEffect(() => {
@@ -28,63 +21,34 @@ const AlbumsDetailsOne = ({ albumId }) => {
 
     fetchAlbumData();
   }, [albumId]);
-  if (!albums) return <div>Loading...</div>;
+  if (!albums) return <Loading />;
   return (
-    <div style={{ background: '#282424' }}>
-      <Sidebar/>
-      <div className="leftBody" style={{ marginRight: '20px', color: 'white' }}>
-        <div style={{ display: 'flex' }}>
-          {/* <select style={profileStyle}>
-          <option disabled selected value> Profile name </option>
-          <option value="fr">French</option>
-          </select> */}
-          <div style={{ paddingTop: '48px' }}>
-            <Link to={`/`} style={{ paddingRight: '20px' }}>Playlists</Link>
-            <Link to={`/`} style={{ paddingRight: '20px' }}>Podcasts</Link>
-            <Link to={`/`} style={{ paddingRight: '20px' }}>Artist</Link>
-            <Link to={`/`} style={{ paddingRight: '20px' }}>Albums</Link>
-          </div>
-        </div>
-        <div style={{ paddingTop: '40px' }}>
-          <Grid container spacing={2}>
-            {albums.map(album => (
-
-              <Grid item xs={2}>
-                <div key={album.id}>
-                  <Card sx={{ maxWidth: 200 }} style={{ backgroundColor: "#100c0c", color: 'white' }}>
-                    <Link to={`/album/${album.id}`}>
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="10"
-                          image={album.images[0].url}
-                          alt={album.name}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {album.name}
-                          </Typography>
-                          <Typography variant="body2" color="grey">
-                            {album.artists.map(artist => artist.name)}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Link>
-                    <CardActions style={{ backgroundColor: "black" }}>
-                      <Button size="small" color="primary">
-                        Share
-                      </Button>
-                    </CardActions>
-                  </Card>
+    <div>
+      <div className='pt-20'>
+        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Playlists</Link>
+        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Podcasts</Link>
+        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Artist</Link>
+        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Albums</Link>
+      </div>
+      <div style={{ paddingTop: '40px' }}>
+        <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
+          {albums.map(album => (
+            <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }} key={album.id}>
+              <Link to={`/album/${album.id}`}>
+                <img src={album.images[0].url} alt={album.name}></img>
+                <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>{album.name}</h4>
+                <div className='flex justify-start items-center gap-x-2'>
+                  <h2 className='my-1' style={{ color: '#D6C4C4' }}>{album.artists.map(artist => artist.name)}</h2>
                 </div>
-              </Grid>
-
-            ))}
-          </Grid>
+                <div className='flex justify-start items-center gap-x-2'>
+                  <h2 className='my-1' style={{ color: '#D6C4C4' }}>{album.release_date}</h2>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-
   )
 }
 
