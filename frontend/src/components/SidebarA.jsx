@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { LuLibrary } from "react-icons/lu";
-import { RxBorderStyle, RxHamburgerMenu } from "react-icons/rx";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { MdOutlineStarBorder } from "react-icons/md";
 
 const SidebarA = () => {
-    const homeIcon = { color: "white", fontSize: "2em" }
-    const searchIcon = { color: "white", fontSize: "2em" }
-    const libraryIcon = { color: "white", fontSize: "2em" }
+    const sidebarIcon = { color: "white", fontSize: "2em" }
     const [collapsed, setCollapsed] = React.useState(false);
     const [toggled, setToggled] = React.useState(false);
     const [broken, setBroken] = React.useState(false);
@@ -30,27 +29,28 @@ const SidebarA = () => {
                 <Menu
                     menuItemStyles={{
                         button: ({ level, active, disabled }) => {
-                            if (level === 0) {
+                            if (level === 0 || level === 1 ) {
                                 return {
                                     color: disabled ? "#eee" : "white",
-                                    backgroundColor: active ? undefined : "#181414",
+                                    backgroundColor: active ? 'rgb(46,46,46)' : "#181414 !important",
+                                    borderRadius: '10px',
+                                    margin: '10px',
+                                    fontWeight: active ? 'bold' : '',
                                     "&:hover": {
-                                        backgroundColor: "#141212 !important",
+                                        backgroundColor: active ? 'rgb(46,46,46)' : "rgb(46,46,46) !important",
                                         color: "white !important",
+                                        borderRadius: '10px',
+                                        margin: '10px',
                                     },
                                 };
                             }
                         },
                     }}
                 >
-                    <MenuItem active icon={<GoHome style={homeIcon} />} component={<Link to={"/"} style={{ marginTop: "40px", }} />}>Home</MenuItem>
-                    <MenuItem icon={<CiSearch style={searchIcon}/>} component={<Link to={"/search"}/>}>Search</MenuItem>
-                    <MenuItem icon={<LuLibrary style={libraryIcon} />}>Library</MenuItem>
-                    <SubMenu defaultOpen label="Playlists">
-                        <MenuItem style={{ background: "#181414", color: "white" }}>Create Playlist</MenuItem>
-                        <MenuItem style={{ background: "#181414", color: "white" }}>Liked Albums</MenuItem>
-                        <MenuItem style={{ background: "#181414", color: "white" }}>Liked Artist</MenuItem>
-                    </SubMenu>
+                    <MenuItem active={location.pathname === '/' } icon={<GoHome style={sidebarIcon} />} component={<Link to={"/"} style={{ margin: '40px 10px 0px' }} />}>Home</MenuItem>
+                    <MenuItem active={location.pathname === '/search'} icon={<CiSearch style={sidebarIcon}/>} component={<Link to={"/search"} style={{ margin: '0px 10px' }}/>}>Search</MenuItem>
+                    <MenuItem icon={<LuLibrary style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Library</MenuItem>
+                    <MenuItem icon={<MdOutlineStarBorder style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Popular</MenuItem>
                 </Menu>
             </Sidebar>
             <div>

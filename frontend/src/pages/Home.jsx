@@ -1,63 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import '../screen.css';
-import Sidebar from '../components/SidebarA';
-import { Link } from 'react-router-dom';
-import Loading from '../components/Loading';
+import React, { useState } from 'react'
+import All from './All'
+import Podcasts from './Podcasts'
+import Artists from './Artists'
+import Playlist from './Playlist'
 
-const AlbumsDetailsOne = ({ albumId }) => {
-  const [albums, setAlbum] = useState(null);
-
-  useEffect(() => {
-    const fetchAlbumData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/search/albums?q=${albumId}`);
-        const data = await response.json();
-        setAlbum(data);
-        console.log(data);
-      } catch (error) {
-        console.error('Error fetching album data:', error);
-      }
-    };
-
-    fetchAlbumData();
-  }, [albumId]);
-  if (!albums) return <Loading />;
+const Home = () => {
+  const [defaultPage, newPage] = useState('all')
+  
+  const changePage = (page) => {
+    newPage(page)
+  }
+  
   return (
-    <div>
-      <div className='pt-20'>
-        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Playlists</Link>
-        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Podcasts</Link>
-        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Artist</Link>
-        <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Albums</Link>
-      </div>
-      <div style={{ paddingTop: '40px' }}>
-        <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
-          {albums.map(album => (
-            <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }} key={album.id}>
-              <Link to={`/album/${album.id}`}>
-                <img src={album.images[0].url} alt={album.name}></img>
-                <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>{album.name}</h4>
-                <div className='flex justify-start items-center gap-x-2'>
-                  <h2 className='my-1' style={{ color: '#D6C4C4' }}>{album.artists.map(artist => artist.name)}</h2>
-                </div>
-                <div className='flex justify-start items-center gap-x-2'>
-                  <h2 className='my-1' style={{ color: '#D6C4C4' }}>{album.release_date}</h2>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className='pt-20 top-6 px-4 py-1'>
+      <button className={defaultPage === 'all' ? 'rounded-lg mr-2 pl-4 px-4 py-2 bg-white text-black font-bold' : 'rounded-lg mr-2 pl-4 px-4 py-2 bg-black'} onClick={() => changePage('all')}>All</button>
+      <button className={defaultPage === 'podcasts' ? 'rounded-lg mr-2 pl-4 px-4 py-2 bg-white text-black font-bold' : 'rounded-lg mr-2 pl-4 px-4 py-2 bg-black'} onClick={() => changePage('podcasts')}>Podcasts</button>
+      <button className={defaultPage === 'artists' ? 'rounded-lg mr-2 pl-4 px-4 py-2 bg-white text-black font-bold' : 'rounded-lg mr-2 pl-4 px-4 py-2 bg-black'} onClick={() => changePage('artists')}>Artists</button>
+      <button className={defaultPage === 'playlists' ? 'rounded-lg mr-2 pl-4 px-4 py-2 bg-white text-black font-bold' : 'rounded-lg mr-2 pl-4 px-4 py-2 bg-black'} onClick={() => changePage('playlists')}>Playlist</button>
+      {defaultPage === 'all' && <All />}
+      {defaultPage === 'podcasts' && <Podcasts />}
+      {defaultPage === 'artists' && <Artists />}
+      {defaultPage === 'playlists' && <Playlist />}
     </div>
   )
 }
-
-const Home = () => {
-  return (
-    <div>
-      <AlbumsDetailsOne albumId="Songs About Jane" />
-    </div>
-  );
-};
 
 export default Home

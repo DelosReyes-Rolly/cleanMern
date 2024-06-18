@@ -40,7 +40,6 @@ const Search = () => {
                     className='rounded-lg mr-2 pl-4 px-28 py-2 bg-black'
                 />
             </form>
-            <h2 className='absolute top-6 right-2 px-4 py-1 bg-red-300 rounded-lg'>asdasd1</h2>
             <div className='pt-20'>
                 {defaultPage === 'genresList' ? <SearchGenres /> : <SearchAlbums albums={albums} />}
             </div>
