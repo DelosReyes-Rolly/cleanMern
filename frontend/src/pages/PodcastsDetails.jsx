@@ -24,7 +24,7 @@ const PodcastsDetails = () => {
     if (!podcastDetails) return (<Loading />)
     return (
         <div>
-            <div style={{ background: '#404040' }} className='podcastDetailBlock'>
+            <div style={{ background: '#404040' }} className='artistAlbumBlock'>
                 <div style={{ paddingTop: '40px' }}>
                     <div className='pb-10' style={{ display: 'flex' }}>
                         <div>
