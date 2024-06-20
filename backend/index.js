@@ -79,7 +79,7 @@ app.get('/api/podcasts', async (req, res) => {
 app.get('/api/artists', async (req, res) => {
   try {
     const token = await getAccessToken();
-    const query = req.query.q || 'podcast';
+    const query = req.query.q || 'best singer';
     const search_url = `https://api.spotify.com/v1/search?query=${encodeURIComponent(query)}&type=artist&locale=en-US&limit=20`;
 
     const searchResponse = await axios.get(search_url, {
@@ -272,6 +272,30 @@ app.get('/api/artist/related/:id', async (req, res) => {
 
     res.json({
       artistRelated: artistRelatedData,
+    });
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//fetch podcasts details
+app.get('/api/podcasts/details/:id', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const podcast_id = req.params.id;
+    const podcastDetails_url = `https://api.spotify.com/v1/shows/${podcast_id}`;
+
+    const podcastDetailsResponse = await axios.get(podcastDetails_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const podcastDetailsData = podcastDetailsResponse.data;
+
+    res.json({
+      podcastDetails: podcastDetailsData,
     });
     
   } catch (error) {
