@@ -86,7 +86,7 @@ const ArtistsDetails = () => {
                         </div>
                     ))}
                 </div>
-            </div> 
+            </div>
             <div className='border-grey-500 rounded-lg px-4 py-2 mb-4 relative hover:shadow-xl col-span-4'>
                 <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>Albums</h4>
                 <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
@@ -101,7 +101,7 @@ const ArtistsDetails = () => {
                             </Link>
                         </div>
                     ))}
-                </div> 
+                </div>
             </div>
             <div className='rounded-lg px-4 py-2 mb-4 relative hover:shadow-xl col-span-4'>
                 <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>Related Artists</h4>
