@@ -30,7 +30,7 @@ const Search = () => {
         }
     };
     return (
-        <div style={{ paddingTop: '40px' }}>
+        <div className='pt-20 top-6 px-4 py-1'>
             <form onSubmit={searchAlbums} className='absolute top-18 py-2'>
                 <input
                     type="text"

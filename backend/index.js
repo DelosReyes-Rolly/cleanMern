@@ -206,3 +206,75 @@ app.get('/api/album/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+// fetch artist details
+app.get('/api/artist/:id', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const artist_id = req.params.id;
+    const artist_url = `https://api.spotify.com/v1/artists/${artist_id}`;
+
+    const artistResponse = await axios.get(artist_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const artistData = artistResponse.data;
+
+    res.json({
+      artist: artistData,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// fetch artist details
+app.get('/api/artist/albums/:id', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const artist_id = req.params.id;
+    const artistAlbums_url = `https://api.spotify.com/v1/artists/${artist_id}/albums`;
+
+    const artistAlbumsResponse = await axios.get(artistAlbums_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const artistAlbumsData = artistAlbumsResponse.data;
+
+    res.json({
+      artistAlbums: artistAlbumsData,
+    });
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//fetch related artist to the artist
+app.get('/api/artist/related/:id', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const artist_id = req.params.id;
+    const artistRelated_url = `https://api.spotify.com/v1/artists/${artist_id}/related-artists`;
+
+    const artistRelatedResponse = await axios.get(artistRelated_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const artistRelatedData = artistRelatedResponse.data;
+
+    res.json({
+      artistRelated: artistRelatedData,
+    });
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});

@@ -22,6 +22,11 @@
     .leftBody{
         margin-left: 280px;
     }
+    .artistAlbumBlock{
+        margin-left: -40px !important;
+        margin-top: -20px !important;
+        padding-left: 40px;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -29,11 +34,21 @@
     .leftBody{
         margin-left: 280px;
     }
+    .artistAlbumBlock{
+        margin-left: -40px !important;
+        margin-top: -20px !important;
+        padding-left: 40px;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .leftBody{
         margin-left: 280px;
+    }
+    .artistAlbumBlock{
+        margin-left: -40px !important;
+        margin-top: -20px !important;
+        padding-left: 40px;
     }
 }

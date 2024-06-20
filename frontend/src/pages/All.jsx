@@ -18,7 +18,7 @@ const AlbumsDetailsOne = ({ albumId }) => {
                 console.error('Error fetching album data:', error);
             }
         };
-
+ 
         fetchAlbumData();
     }, [albumId]);
     if (!albums) return <Loading />;

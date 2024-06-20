@@ -4,6 +4,7 @@ import Sidebar from '../components/SidebarA';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
+import Search from './Search';
 
 const GenreAlbum = () => {
     const [albums, setAlbums] = useState([]);
@@ -25,14 +26,8 @@ const GenreAlbum = () => {
     if (albums === 0) return <Loading />;
     return (
         <div>
-            <div className='pt-20'>
-                <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Playlists</Link>
-                <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Podcasts</Link>
-                <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Artist</Link>
-                <Link to={`/`} className='rounded-lg mr-2 pl-4 px-4 py-4 bg-black'>Albums</Link>
-            </div>
-            <div style={{ paddingTop: '40px' }}>
-                <h2>Albums in {genre}</h2>
+            <div className='pt-20 top-6 px-4 py-1'>
+                <h1 style={{ fontFamily: 'Arial', fontSize: '26px' }}>Albums in {genre}</h1>
                 <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
                     {albums.map(album => (
                         <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }} key={album.id}>

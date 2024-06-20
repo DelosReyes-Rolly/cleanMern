@@ -28,7 +28,7 @@ const AlbumDetails = () => {
 
   return (
     <div>
-      <div style={{ background: '#404040' }}>
+      <div style={{ background: '#404040' }} className='artistAlbumBlock'>
         <div style={{ paddingTop: '40px' }}>
           <div className='my-8 pb-10' style={{ display: 'flex' }}>
             <div>
