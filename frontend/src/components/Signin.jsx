@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { signin, authenticate } from '../Backend.js';
-import { Navigate } from 'react-router-dom'; 
+import { Navigate } from 'react-router-dom';
 
 // Signin component for the login form
-export function Signin(){
+export function Signin() {
 
     // Initializing states for form fields, error, loading, and success messages
     const [values, setValues] = useState({
@@ -16,7 +16,7 @@ export function Signin(){
 
     // Destructuring values from the state
     const { email, password, error, loading, success } = values;
-    
+
     // Handles changes in the input fields
     const handleChange = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value });
@@ -61,21 +61,21 @@ export function Signin(){
 
     return (
         success ? <Navigate to="/" /> :
-            <div className='form-container'>
-                <div className='form-box'>
-                    <h2>Signin</h2>
+            <div className='grid h-screen place-items-center'>
+                <div className='rounded-lg hover:shadow-xl w-1/2 p-10' style={{ backgroundColor: "#100c0c" }}>
+                    <h2 className='text-center text-4xl font-bold'>Sign In</h2>
                     {loadingMessage()}
                     {errorMessage()}
                     <div className='form-group'>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email</label><br/>
                         <input type="text" id="email" name="email" value={email} onChange={handleChange("email")} required />
                     </div>
                     <div className='form-group'>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password</label><br/>
                         <input type="password" id="password" name="password" value={password} onChange={handleChange("password")} required />
                     </div>
-                    <div className="form-group-button">
-                        <button onClick={onSubmit}>Log in</button>
+                    <div className="form-group-button grid place-items-center"><br/>
+                        <button className='w-full bg-indigo-500 rounded-full' onClick={onSubmit}>LOGIN</button>
                     </div>
                     <div className='login-message'>
                         <center><p className='login_redirect mt-2'>Don't have an account?<b><a href='/signup'> Signup here</a></b></p></center>
