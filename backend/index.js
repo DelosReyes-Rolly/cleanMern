@@ -1,4 +1,7 @@
 import express from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import router from "./routes/AuthRoute.js";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from 'cors';
@@ -33,6 +36,15 @@ mongoose.connect(mongoDBURL).then(() => {
 }).catch((error) => {
   console.log(error);
 })
+
+// Middleware Configuration
+// Body-parser to parse incoming request bodies as JSON
+app.use(bodyParser.json());
+// Cookie-parser for handling cookies
+app.use(cookieParser());
+// Routing
+// Mounting authentication-related routes under the '/api' endpoint
+app.use("/api", router);
 
 // Function to get access token with caching
 const getAccessToken = async () => {
@@ -249,7 +261,7 @@ app.get('/api/artist/albums/:id', async (req, res) => {
     res.json({
       artistAlbums: artistAlbumsData,
     });
-    
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -273,7 +285,7 @@ app.get('/api/artist/related/:id', async (req, res) => {
     res.json({
       artistRelated: artistRelatedData,
     });
-    
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -297,7 +309,7 @@ app.get('/api/podcasts/details/:id', async (req, res) => {
     res.json({
       podcastDetails: podcastDetailsData,
     });
-    
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

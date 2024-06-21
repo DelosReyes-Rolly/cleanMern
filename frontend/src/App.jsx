@@ -7,6 +7,9 @@ import GenreAlbum from './pages/GenreAlbums'
 import SidebarA from './components/SidebarA'
 import ArtistsDetails from './pages/ArtistsDetails'
 import PodcastsDetails from './pages/PodcastsDetails'
+import Dashboard from './components/Dashboard'
+import Signin from './components/Signin'
+import Signup from './components/Signup'
 
 const App = () => {
   return (
@@ -22,6 +25,8 @@ const App = () => {
             <Route path="/albums/:genre" element={<GenreAlbum />} />
             <Route path="/artist/:id" element={<ArtistsDetails/>}/>
             <Route path="/podcast/:id" element={<PodcastsDetails/>}/>
+            <Route exact path="/signin" element={<Signin/>} />
+            <Route exact path='/signup' element={<Signup/>} />
           </Routes>
         </div>
       </div>
