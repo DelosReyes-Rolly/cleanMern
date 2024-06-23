@@ -59,7 +59,7 @@ const ArtistsDetails = () => {
     if (!artistRelated || !artistAlbums || !artist) return <Loading />
 
     return (
-        <div style={{ background: '#282424', height: '100vh' }}>
+        <div style={{ background: '#282424' }}>
             <SidebarA />
             <div className="leftBody" style={{ color: 'white' }}>
                 <Dropdown />

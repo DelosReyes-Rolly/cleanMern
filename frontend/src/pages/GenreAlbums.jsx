@@ -27,7 +27,7 @@ const GenreAlbum = () => {
     }, [genre]);
     if (albums === 0) return <Loading />;
     return (
-        <div style={{ background: '#282424', height: '100vh' }}>
+        <div style={{ background: '#282424'}}>
             <SidebarA />
             <div className="leftBody" style={{ color: 'white' }}>
                 <Dropdown />
