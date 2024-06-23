@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../screen.css';
-import Sidebar from '../components/SidebarA';
 import { Link } from 'react-router-dom';
 
 const SearchAlbums = ({ albums }) => {

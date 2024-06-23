@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import '../screen.css';
-import Sidebar from '../components/SidebarA';
-import { Link } from 'react-router-dom';
 import SearchGenres from './SearchGenres';
 import SearchAlbums from './SearchAlbums';
+import Signin from '../components/Signin';
+import SidebarA from '../components/SidebarA';
+import Dropdown from '../components/Dropdown';
+import { isAuthenticated } from '../Backend.js';
 
 const Search = () => {
     const [defaultPage, newPage] = useState('genresList');
@@ -29,21 +31,29 @@ const Search = () => {
             console.error('Error fetching albums:', error);
         }
     };
+    const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
     return (
-        <div className='pt-20 top-6 px-4 py-1'>
-            <form onSubmit={searchAlbums} className='absolute top-18 py-2'>
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search for an album"
-                    className='rounded-lg mr-2 pl-4 px-28 py-2 bg-black'
-                />
-            </form>
-            <div className='pt-20'>
-                {defaultPage === 'genresList' ? <SearchGenres /> : <SearchAlbums albums={albums} />}
+        !authenticatedUser ? <Signin /> :
+            <div style={{ background: '#282424' }}>
+                <SidebarA />
+                <div className="leftBody" style={{ color: 'white' }}>
+                    <Dropdown />
+                    <div className='pt-20 top-6 px-4 py-1'>
+                        <form onSubmit={searchAlbums} className='absolute top-18 py-2'>
+                            <input
+                                type="text"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                placeholder="Search for an album"
+                                className='rounded-lg mr-2 pl-4 px-28 py-2 bg-black'
+                            />
+                        </form>
+                        <div className='pt-20'>
+                            {defaultPage === 'genresList' ? <SearchGenres /> : <SearchAlbums albums={albums} />}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
     )
 }
 

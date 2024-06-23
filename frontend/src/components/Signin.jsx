@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { signin, authenticate } from '../Backend.js';
 import { Navigate } from 'react-router-dom';
+import Home from '../pages/Home.jsx';
+import { useNavigate } from "react-router-dom";
 
 // Signin component for the login form
 export function Signin() {
@@ -13,6 +15,14 @@ export function Signin() {
         loading: false,
         success: false,
     });
+
+
+
+    const navigate = useNavigate();
+
+    const refreshPage = () => {
+        navigate(0);
+    }
 
     // Destructuring values from the state
     const { email, password, error, loading, success } = values;
@@ -60,25 +70,27 @@ export function Signin() {
 
 
     return (
-        success ? <Navigate to="/" /> :
-            <div className='grid h-screen place-items-center'>
-                <div className='rounded-lg hover:shadow-xl w-1/2 p-10' style={{ backgroundColor: "#100c0c" }}>
-                    <h2 className='text-center text-4xl font-bold'>Sign In</h2>
-                    {loadingMessage()}
-                    {errorMessage()}
-                    <div className='form-group'>
-                        <label htmlFor="email">Email</label><br/>
-                        <input type="text" id="email" name="email" value={email} onChange={handleChange("email")} required />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor="password">Password</label><br/>
-                        <input type="password" id="password" name="password" value={password} onChange={handleChange("password")} required />
-                    </div>
-                    <div className="form-group-button grid place-items-center"><br/>
-                        <button className='w-full bg-indigo-500 rounded-full' onClick={onSubmit}>LOGIN</button>
-                    </div>
-                    <div className='login-message'>
-                        <center><p className='login_redirect mt-2'>Don't have an account?<b><a href='/signup'> Signup here</a></b></p></center>
+        success ? <Home /> :
+            <div style={{ background: '#282424' }}>
+                <div className='grid h-screen place-items-center text-white'>
+                    <div className='rounded-lg hover:shadow-xl w-2/4 p-10' style={{ backgroundColor: "#100c0c" }}>
+                        <h2 className='text-center text-4xl font-bold mb-6'>Sign In</h2>
+                        {loadingMessage()}
+                        {errorMessage()}
+                        <div className='form-group'>
+                            <label htmlFor="email">Email</label><br />
+                            <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="email" id="email" name="email" value={email} onChange={handleChange("email")} required autoFocus />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor="password">Password</label><br />
+                            <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="password" id="password" name="password" value={password} onChange={handleChange("password")} required />
+                        </div>
+                        <div className="form-group-button grid place-items-center p-2"><br />
+                            <button className='w-full bg-indigo-500 rounded-full p-2' onClick={onSubmit}>LOGIN</button>
+                        </div>
+                        <div className='login-message'>
+                            <center><p className='login_redirect mt-2'>Don't have an account?<b><a href='/signup'> Sign up here</a></b></p></center>
+                        </div>
                     </div>
                 </div>
             </div>

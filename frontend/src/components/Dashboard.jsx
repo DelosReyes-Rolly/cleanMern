@@ -14,7 +14,7 @@ const Dashboard = () => {
     };
 
     return (
-        !authenticatedUser ? <h1>Please sign in</h1> :
+        !authenticatedUser ? navigate('/signin') :
             <div className='dashboard'>
                 <button onClick={onSignout}>Sign Out</button>
                 <h1>Hello, {authenticatedUser.user.name}</h1> {/* Display user's name */}

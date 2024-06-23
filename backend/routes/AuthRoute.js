@@ -10,7 +10,7 @@ router.post(
     [
         // Validation for name, email, and password
         check("name", "Name must be 3+ chars long").isLength({ min: 3 }),
-        check("email", "Email is required").isEmail(),
+        check("email", "Please input valid email").isEmail(),
         check("password", "Password must contain 8+ chars").isLength({ min: 8 })
     ],
     signup // Call the signup function from the authController
@@ -20,8 +20,8 @@ router.post(
     "/signin",
     [
         // Validation for email and password
-        check("email", "Email is required").isEmail(),
-        check("password", "Password is required").isLength({ min: 1 })
+        check("email", "Please input valid email").isEmail(),
+        check("password", "Please input valid password").isLength({ min: 1 })
     ],
     signin // Call the signin function from the authController
 );

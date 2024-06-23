@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
     },
     {timestamps: true}
 );
-//Creating a "virtua" field that will take in password and encrypt it
+//Creating a "virtual" field that will take in password and encrypt it
 userSchema.virtual("password")
     .set(function(password){
         this._password = password;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { signup } from "../Backend.js";
 
 // Signup component for the signup form
@@ -71,28 +71,30 @@ function Signup() {
     }
 
 
-   
+
     return (
-        <div className='form-container'>
-            <div className='form-box'>
-                <h2>Create an account</h2>
-                {errorMessage()}
-                {loadingMessage()}
-                {successMessage()}
-                <div className='form-group'>
-                    <label htmlFor="name">Username</label>
-                    <input type="text" id="name" name="name" onChange={handleChange("name")} required />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" id="email" name="email" onChange={handleChange("email")} required />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" onChange={handleChange("password")} required />
-                </div>
-                <div className="form-group-button">
-                    <button onClick={onSubmit}>Signup</button>
+        <div style={{ background: '#282424' }} className="text-white">
+            <div className='grid h-screen place-items-center'>
+                <div className='rounded-lg hover:shadow-xl w-1/2 p-10' style={{ backgroundColor: "#100c0c" }}>
+                    <h2 className='text-center text-4xl font-bold mb-6'>Create an account</h2>
+                    {errorMessage()}
+                    {loadingMessage()}
+                    {successMessage()}
+                    <div className='form-group'>
+                        <label htmlFor="name">Username</label><br />
+                        <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="text" id="name" name="name" onChange={handleChange("name")} required autoFocus />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="email">Email</label><br />
+                        <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="email" id="email" name="email" onChange={handleChange("email")} required />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="password">Password</label><br />
+                        <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="password" id="password" name="password" onChange={handleChange("password")} required />
+                    </div>
+                    <div className="form-group-button grid place-items-center p-2"><br />
+                        <button className='w-full bg-indigo-500 rounded-full p-2' onClick={onSubmit}>Signup</button>
+                    </div>
                 </div>
             </div>
         </div>
