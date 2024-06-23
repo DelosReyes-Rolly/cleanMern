@@ -9,6 +9,7 @@ import PodcastsDetails from './pages/PodcastsDetails'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
 import Profile from './pages/Profile'
+import Settings from './pages/Settings'
 const App = () => {
 
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route exact path="/signin" element={<Signin />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='/profile' element={<Profile />} />
+        <Route exact path='/settings' element={<Settings/>} />
       </Routes>
     </React.StrictMode>
   )

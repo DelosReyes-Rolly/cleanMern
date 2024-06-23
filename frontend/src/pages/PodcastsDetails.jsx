@@ -30,7 +30,7 @@ const PodcastsDetails = () => {
     if (!podcastDetails) return (<Loading />)
     return (
         !authenticatedUser ? <Signin /> :
-        <div style={{ background: '#282424' }}>
+        <div style={{ background: '#282424', height: '100vh' }}>
             <SidebarA />
             <div className="leftBody" style={{ color: 'white' }}>
                 <Dropdown />

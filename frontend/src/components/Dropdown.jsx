@@ -58,9 +58,11 @@ const Dropdown = () => {
                                     <p className='float-left inset-y-0 left-0'>Profile</p>
                                 </button>
                             </Link>
-                            <button className="block py-2 px-4 hover:outline-none hover:bg-gray-800 w-full">
-                                <p className='float-left inset-y-0 left-0'>Settings</p>
-                            </button>
+                            <Link to={"/settings"}>
+                                <button className="block py-2 px-4 hover:outline-none hover:bg-gray-800 w-full">
+                                    <p className='float-left inset-y-0 left-0'>Settings</p>
+                                </button>
+                            </Link>
                             <button className="block py-2 px-4 hover:outline-none hover:bg-gray-800 w-full border-t-2 border-gray-800" onClick={onSignout}>
                                 <p className='float-left inset-y-0 left-0'>Sign Out</p>
                             </button>

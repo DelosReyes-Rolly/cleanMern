@@ -31,7 +31,7 @@ const Profile = () => {
                                     <input type='text' placeholder={authenticatedUser.user.name} className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800' id='name' name='name' autoFocus/>
                                     <p className='border-b-2 border-gray-800'></p>
                                     <div className="form-group-button grid place-items-center p-2"><br />
-                                        <button className='w-1/4 bg-indigo-500 rounded-lg p-2'>Submit</button>
+                                        <button className='w-1/4 bg-indigo-600 rounded-lg p-2 hover:bg-indigo-800'>Submit</button>
                                     </div>
                                 </div>
                                 <div className='p-6'>

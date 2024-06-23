@@ -71,7 +71,7 @@ export function Signin() {
 
     return (
         success ? <Home /> :
-            <div style={{ background: '#282424' }}>
+            <div style={{ background: '#282424', height: '100vh' }}>
                 <div className='grid h-screen place-items-center text-white'>
                     <div className='rounded-lg hover:shadow-xl w-2/4 p-10' style={{ backgroundColor: "#100c0c" }}>
                         <h2 className='text-center text-4xl font-bold mb-6'>Sign In</h2>
@@ -79,14 +79,14 @@ export function Signin() {
                         {errorMessage()}
                         <div className='form-group'>
                             <label htmlFor="email">Email</label><br />
-                            <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="email" id="email" name="email" value={email} onChange={handleChange("email")} required autoFocus />
+                            <input className='w-full rounded border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="email" id="email" name="email" value={email} onChange={handleChange("email")} required autoFocus />
                         </div>
                         <div className='form-group'>
                             <label htmlFor="password">Password</label><br />
-                            <input className='w-full border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="password" id="password" name="password" value={password} onChange={handleChange("password")} required />
+                            <input className='w-full rounded border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="password" id="password" name="password" value={password} onChange={handleChange("password")} required />
                         </div>
                         <div className="form-group-button grid place-items-center p-2"><br />
-                            <button className='w-full bg-indigo-500 rounded-full p-2' onClick={onSubmit}>LOGIN</button>
+                            <button className='w-full bg-indigo-600 rounded-full p-2 hover:bg-indigo-800' onClick={onSubmit}>LOGIN</button>
                         </div>
                         <div className='login-message'>
                             <center><p className='login_redirect mt-2'>Don't have an account?<b><a href='/signup'> Sign up here</a></b></p></center>
