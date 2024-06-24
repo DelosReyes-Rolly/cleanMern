@@ -8,6 +8,7 @@ import Dropdown from '../components/Dropdown';
 import { isAuthenticated } from '../Backend.js';
 
 const Search = () => {
+    const inputRef = React.useRef(null);
     const [defaultPage, newPage] = useState('genresList');
     const changePages = () => {
         newPage(defaultPage == 'genresList' ? 'albumsList' : 'genresList');
@@ -23,7 +24,7 @@ const Search = () => {
     const searchAlbums = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/api/search/albums?q=${encodeURIComponent(query)}`);
+            const response = await fetch(`http://localhost:3000/api/search/albums?q=${encodeURIComponent(inputRef.current.value)}`);
             const data = await response.json();
             setAlbums(data);
             changePages();
@@ -42,10 +43,10 @@ const Search = () => {
                         <form onSubmit={searchAlbums} className='absolute top-18 py-2'>
                             <input
                                 type="text"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
+                           
+                                ref={inputRef}
                                 placeholder="Search for an album"
-                                className='rounded-lg mr-2 pl-4 px-28 py-2 bg-black'
+                                className='w-full rounded-lg mr-2 pl-4 px-4 py-2 bg-black'
                             />
                         </form>
                         <div className='pt-20'>
