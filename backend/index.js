@@ -8,6 +8,7 @@ import cors from 'cors';
 import axios from 'axios';
 import querystring from 'querystring';
 import NodeCache from "node-cache";
+import { User } from "./models/UserModel.js";
 const app = express();
 
 const client_id = '6b31feeaaaa04c539545cc62a5f20fde';
@@ -312,5 +313,32 @@ app.get('/api/podcasts/details/:id', async (req, res) => {
 
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/edit/profile/:id', async (request, response) => {
+  try {
+      const { name } = request.body;
+      if (!name) {
+          return response.status(400).send({
+              message: 'Send all the required fields.',
+          });
+      }
+
+      const { id } = request.params;
+      const data = { $set: { name } };
+
+      // Assuming the ID is the MongoDB ObjectID
+      const result = await User.updateOne({ _id: id }, { $set: { name } });
+
+      // Check if any document was matched and updated
+      if (result.matchedCount === 0) {
+          return response.status(404).send({ message: 'Account not found' });
+      }
+
+      return response.status(200).send({ message: 'Account updated' });
+  } catch (error) {
+      console.error(error);
+      response.status(500).send({ message: error.message });
   }
 });
