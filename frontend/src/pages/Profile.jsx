@@ -19,6 +19,7 @@ const Profile = () => {
         const data = {
             name,
         };
+        console.log(data);
         axios
             .put(`http://localhost:3000/edit/profile/${authenticatedUser.user._id}`, data)
             .then(() => {

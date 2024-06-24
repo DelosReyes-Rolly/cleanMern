@@ -329,7 +329,7 @@ app.put('/edit/profile/:id', async (request, response) => {
       const data = { $set: { name } };
 
       // Assuming the ID is the MongoDB ObjectID
-      const result = await User.updateOne({ _id: id }, { $set: { name } });
+      const result = await User.findOneAndUpdate({ _id: id }, { $set: { name } });
 
       // Check if any document was matched and updated
       if (result.matchedCount === 0) {
