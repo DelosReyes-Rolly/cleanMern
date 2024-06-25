@@ -64,7 +64,7 @@ function Signup() {
         return (
             success && (
                 <div>
-                    <center><p className='login_redirect mt-2'>Account created successfully <b><a href='/login'>Login here</a></b></p></center>
+                    <center><p className='login_redirect mt-2'>Account created successfully <b><a href='/'>Login here</a></b></p></center>
                 </div>
             )
         );
@@ -79,7 +79,6 @@ function Signup() {
                     <h2 className='text-center text-4xl font-bold mb-6'>Create an account</h2>
                     {errorMessage()}
                     {loadingMessage()}
-                    {successMessage()}
                     <div className='form-group'>
                         <label htmlFor="name">Username</label><br />
                         <input className='w-full rounded border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="text" id="name" name="name" onChange={handleChange("name")} required autoFocus />
@@ -93,11 +92,14 @@ function Signup() {
                         <input className='w-full rounded border-b-4 outline-none border-blue-600 text-black p-2 mb-4' type="password" id="password" name="password" onChange={handleChange("password")} required />
                     </div>
                     <div className="form-group-button grid place-items-center p-2"><br />
-                        <button className='w-full bg-indigo-600 rounded-full p-2 hover:bg-indigo-800' onClick={onSubmit}>Signup</button>
+                        <button className='w-full bg-indigo-600 rounded-full p-2 hover:bg-indigo-800' onClick={onSubmit}>Sign up</button>
                     </div>
+                    {!success && (
                     <div className='login-message'>
                         <center><p className='login_redirect mt-2'>Already have an account?<b><a href='/'> Log in here</a></b></p></center>
                     </div>
+                    )}
+                    {successMessage()}
                 </div>
             </div>
         </div>

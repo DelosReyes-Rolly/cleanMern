@@ -318,27 +318,75 @@ app.get('/api/podcasts/details/:id', async (req, res) => {
 
 app.put('/edit/profile/:id', async (request, response) => {
   try {
-      const { name } = request.body;
-      if (!name) {
-          return response.status(400).send({
-              message: 'Send all the required fields.',
-          });
-      }
+    const { name } = request.body;
+    if (!name) {
+      return response.status(400).send({
+        message: 'Send all the required fields.',
+      });
+    }
 
-      const { id } = request.params;
-      const data = { $set: { name } };
+    const { id } = request.params;
+    const data = { $set: { name } };
 
-      // Assuming the ID is the MongoDB ObjectID
-      const result = await User.findOneAndUpdate({ _id: id }, { $set: { name } });
+    // Assuming the ID is the MongoDB ObjectID
+    const result = await User.findOneAndUpdate({ _id: id }, { $set: { name } });
 
-      // Check if any document was matched and updated
-      if (result.matchedCount === 0) {
-          return response.status(404).send({ message: 'Account not found' });
-      }
+    // Check if any document was matched and updated
+    if (result.matchedCount === 0) {
+      return response.status(404).send({ message: 'Account not found' });
+    }
 
-      return response.status(200).send({ message: 'Account updated' });
+    return response.status(200).send({ message: 'Account updated' });
   } catch (error) {
-      console.error(error);
-      response.status(500).send({ message: error.message });
+    console.error(error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+app.post('/check/password/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const { password } = request.body
+
+    console.log(id);
+    console.log(password);
+
+    //match the passwords and return success
+
+    await User.findOne({ _id: `${id}` })
+      .then(user => {
+        if (!user) {
+          return response.status(400).json({
+            error: "User not found"
+          });
+        }
+        if (!user.authenticate(password)) {
+          return response.status(401).json({
+            error: "Email or Password does not exist"
+          });
+        }
+        return response.status(200).send({ message: 'User deleted' });
+      });
+ 
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ messsage: error.message });
+  }
+});
+
+app.delete('/delete/profile/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    const result = await User.findByIdAndDelete(id, request.body);
+
+    if (!result) {
+      return response.status(404).send({ message: 'User not found' });
+    }
+
+    return response.status(200).send({ message: 'User deleted' });
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ message: error.message });
   }
 });
