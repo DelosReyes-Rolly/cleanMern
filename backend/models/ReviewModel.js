@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const reviewSchema = mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
     {
         user_id:{
             type: String,
@@ -19,7 +19,7 @@ const reviewSchema = mongoose.Schema(
             required: true,
         },
         stars:{
-            type: Int32,
+            type: Number,
             required: true,
         }
     },
@@ -27,4 +27,4 @@ const reviewSchema = mongoose.Schema(
         timestamps: true,
     }
 )
-export const Review = mongoose.Model('Review', reviewSchema);
+export const Review = mongoose.model('Review', reviewSchema);
