@@ -9,6 +9,8 @@ import axios from 'axios';
 import querystring from 'querystring';
 import NodeCache from "node-cache";
 import { User } from "./models/UserModel.js";
+import { Review } from "./models/ReviewModel.js";
+import { Comment }from "./models/CommentModel.js";
 const app = express();
 
 const client_id = '6b31feeaaaa04c539545cc62a5f20fde';
@@ -367,7 +369,7 @@ app.post('/check/password/:id', async (request, response) => {
         }
         return response.status(200).send({ message: 'User deleted' });
       });
- 
+
   } catch (error) {
     console.log(error);
     response.status(500).send({ messsage: error.message });
@@ -390,3 +392,27 @@ app.delete('/delete/profile/:id', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+app.post('/album/review/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const { title, description } = request.body;
+    if (!title || !description) {
+      return response.status(400).send({
+        message: 'Send all the required fields.',
+      });
+    }
+
+    const newReview = { 
+      title:title, 
+      description:description 
+    };
+    const review = await User.create(newReview);
+
+    return response.status(201).send(review);
+
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ message: error.message });
+  }
+})
