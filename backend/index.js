@@ -426,7 +426,6 @@ app.post('/album/comment/:id', async (request, response) => {
     const { id } = request.params;
     
     const { userId, userName, commentOne } = request.body;
-    console.log(commentOne);
     if (!userId || !commentOne) {
       return response.status(400).send({
         message: 'Send all the required fields.',

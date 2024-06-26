@@ -34,8 +34,6 @@ const AlbumDetails = () => {
         setTracks(data.tracks);
         setReviews(data.albumReviews);
         setAlbum(data.album);
-        console.log(data.albumReviews);
-        console.log(data.albumReviews.comments);
       } catch (error) {
         console.error('Error fetching album data:', error);
       }
