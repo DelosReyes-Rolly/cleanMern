@@ -21,6 +21,7 @@ const AlbumDetails = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const userId = authenticatedUser.user._id;
+  const userName = authenticatedUser.user.name;
   const { enqueueSnackbar } = useSnackbar();
   const [reviews, setReviews] = useState([]);
   const [comment, setComment] = useState({});
@@ -46,6 +47,7 @@ const AlbumDetails = () => {
   const handleReview = () => {
     const data = {
       userId,
+      userName,
       title,
       description,
     };
@@ -64,9 +66,9 @@ const AlbumDetails = () => {
     const commentOne = comment.comment;
     const data = {
       userId,
+      userName,
       commentOne,
     };
-    console.log(commentOne);
     axios
       .post(`http://localhost:3000/album/comment/${comment.id}`, data)
       .then(() => {
@@ -155,10 +157,14 @@ const AlbumDetails = () => {
           <div className='flex justify-start items-center gap-x-2'>
             {reviews?.map(review => (
               <div key={review._id} style={{ color: '#D6C4C4' }}>
-                {review.title}
-                {review.description}
+                {review.user}<br/>
+                {review.title}<br/>
+                {review.description}<br/>
                 {review?.comments.map(com => (
-                  <div>{com.comment}</div>
+                  <div>
+                    {com.user}<br/>
+                    {com.comment}<br/>
+                  </div>
                 ))}
                 <textarea
                   placeholder='comment'

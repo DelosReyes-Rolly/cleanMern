@@ -396,7 +396,7 @@ app.delete('/delete/profile/:id', async (request, response) => {
 app.post('/album/review/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const { userId, title, description } = request.body;
+    const { userId, userName, title, description } = request.body;
     if (!title || !description) {
       return response.status(400).send({
         message: 'Send all the required fields.',
@@ -405,10 +405,12 @@ app.post('/album/review/:id', async (request, response) => {
 
     const newReview = {
       user_id: userId,
+      user:userName,
       album_id: id,
       title: title,
       description: description,
     };
+    
     const review = await Review.create(newReview);
 
     return response.status(201).send(review);
@@ -423,7 +425,7 @@ app.post('/album/comment/:id', async (request, response) => {
   try {
     const { id } = request.params;
     
-    const { userId, commentOne } = request.body;
+    const { userId, userName, commentOne } = request.body;
     console.log(commentOne);
     if (!userId || !commentOne) {
       return response.status(400).send({
@@ -433,6 +435,7 @@ app.post('/album/comment/:id', async (request, response) => {
 
     const newComment = {
       user_id: userId,
+      user:userName,
       comment: commentOne,
     };
     const comments = await Review.updateOne({_id:id}, {$push: {"comments":newComment}});

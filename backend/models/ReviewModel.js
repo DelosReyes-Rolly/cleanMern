@@ -10,6 +10,10 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        user: {
+            type: String,
+            required: true,
+        },
         title: {
             type: String,
             required: true,
@@ -25,6 +29,11 @@ const reviewSchema = new mongoose.Schema(
         comments: [{
             user_id: {
                 type: String,
+                required: true,
+            },
+            user: {
+                type: String,
+                required: true,
             },
             comment: {
                 type: String,
