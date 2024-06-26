@@ -10,7 +10,6 @@ import querystring from 'querystring';
 import NodeCache from "node-cache";
 import { User } from "./models/UserModel.js";
 import { Review } from "./models/ReviewModel.js";
-import { Comment }from "./models/CommentModel.js";
 const app = express();
 
 const client_id = '6b31feeaaaa04c539545cc62a5f20fde';
@@ -212,10 +211,11 @@ app.get('/api/album/:id', async (req, res) => {
     const albumData = albumResponse.data;
     const trackIds = albumData.tracks.items.map(track => track.id);
     const trackDetails = await getTrackDetails(trackIds, token);
-
+    const albumReviews = await getAlbumReviews(album_id);
     res.json({
       album: albumData,
-      tracks: trackDetails
+      tracks: trackDetails,
+      albumReviews: albumReviews,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -396,18 +396,20 @@ app.delete('/delete/profile/:id', async (request, response) => {
 app.post('/album/review/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const { title, description } = request.body;
+    const { userId, title, description } = request.body;
     if (!title || !description) {
       return response.status(400).send({
         message: 'Send all the required fields.',
       });
     }
 
-    const newReview = { 
-      title:title, 
-      description:description 
+    const newReview = {
+      user_id: userId,
+      album_id: id,
+      title: title,
+      description: description,
     };
-    const review = await User.create(newReview);
+    const review = await Review.create(newReview);
 
     return response.status(201).send(review);
 
@@ -416,3 +418,34 @@ app.post('/album/review/:id', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 })
+
+app.post('/album/comment/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    
+    const { userId, commentOne } = request.body;
+    console.log(commentOne);
+    if (!userId || !commentOne) {
+      return response.status(400).send({
+        message: 'Send all the required fields.',
+      });
+    }
+
+    const newComment = {
+      user_id: userId,
+      comment: commentOne,
+    };
+    const comments = await Review.updateOne({_id:id}, {$push: {"comments":newComment}});
+
+    return response.status(201).send(comments);
+
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ message: error.message })
+  }
+})
+
+const getAlbumReviews = async (albumId) => {
+  const reviews = await Review.find({ album_id:albumId });
+  return reviews; 
+}; 

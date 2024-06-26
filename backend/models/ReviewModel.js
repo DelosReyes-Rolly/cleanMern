@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
     {
-        user_id:{
+        user_id: {
             type: String,
             required: true,
         },
-        album_id:{
+        album_id: {
             type: String,
             required: true,
         },
@@ -18,10 +18,18 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        stars:{
+        stars: {
             type: Number,
-            required: true,
-        }
+            required: false,
+        },
+        comments: [{
+            user_id: {
+                type: String,
+            },
+            comment: {
+                type: String,
+            },
+        }],
     },
     {
         timestamps: true,
