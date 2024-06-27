@@ -1,7 +1,7 @@
 
 Music review with Social Media like interaction:
 
-Future thing to do:
+Future things to do:
 
  - Make chatting possible.
  - Can like and dislike reviews (if possible, comment too).
@@ -13,7 +13,7 @@ Things to do:
  - Api (for getting music data)
  - Flow
 
-Flow:
+System Flow:
 
  * 2 users - Admin and user
  * Admin
