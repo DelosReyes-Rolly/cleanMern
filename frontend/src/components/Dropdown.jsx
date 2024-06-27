@@ -3,6 +3,7 @@ import { isAuthenticated } from '../Backend.js';
 import Signin from './Signin.jsx';
 import { signout } from '../Backend.js';
 import { Link, useNavigate } from 'react-router-dom';
+import HomeOne from '../pages/HomeOne.jsx';
 
 const Dropdown = () => {
     const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
@@ -21,6 +22,7 @@ const Dropdown = () => {
 
     return (
         !authenticatedUser ? <Signin /> :
+        authenticatedUser.user.user_type === 1 ? <HomeOne /> :
             <div className="dropdown">
                 <button
                     className={`absolute top-6 right-8 w-44 px-4 py-2.5 inline-flex items-center ${isOpen ? 'rounded-t-lg' : 'rounded-lg'}`}

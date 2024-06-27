@@ -41,7 +41,7 @@ export const signin = async (req, res) => {
         });
     }
     // Checking user credentials and generating JWT token for authentication
-    const { email, password } = req.body;
+    const { email, password, user_type } = req.body;
     await User.findOne({ email: `${email}` })
         .then(user => {
             if (!user) {
@@ -57,8 +57,8 @@ export const signin = async (req, res) => {
             // Setting JWT token as a cookie in the browser
             const token = jwtToken.sign({ _id: user._id }, 'shhhhh');
             res.cookie("token", token, { expire: new Date() + 9999 });
-            const { _id, name, email } = user;
-            return res.json({ token, user: { _id, name, email } });
+            const { _id, name, email, user_type } = user;
+            return res.json({ token, user: { _id, name, email, user_type } });
         });
 };
 

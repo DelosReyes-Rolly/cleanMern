@@ -1,6 +1,8 @@
 import React from 'react';
 import { isAuthenticated, signout } from '../Backend.js';
 import { useNavigate } from 'react-router-dom';
+import HomeOne from '../pages/HomeOne.jsx';
+import Signin from './Signin.jsx';
 
 const Dashboard = () => {
     const navigate = useNavigate(); // Initialize navigation
@@ -14,11 +16,12 @@ const Dashboard = () => {
     };
 
     return (
-        !authenticatedUser ? navigate('/signin') :
-            <div className='dashboard'>
-                <button onClick={onSignout}>Sign Out</button>
-                <h1>Hello, {authenticatedUser.user.name}</h1> {/* Display user's name */}
-            </div>
+        !authenticatedUser ? <Signin /> :
+            authenticatedUser.user.user_type === 1 ? <HomeOne /> :
+                <div className='dashboard'>
+                    <button onClick={onSignout}>Sign Out</button>
+                    <h1>Hello, {authenticatedUser.user.name}</h1> {/* Display user's name */}
+                </div>
     );
 };
 
