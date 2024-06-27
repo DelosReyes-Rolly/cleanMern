@@ -405,12 +405,12 @@ app.post('/album/review/:id', async (request, response) => {
 
     const newReview = {
       user_id: userId,
-      user:userName,
+      user: userName,
       album_id: id,
       title: title,
       description: description,
     };
-    
+
     const review = await Review.create(newReview);
 
     return response.status(201).send(review);
@@ -424,7 +424,7 @@ app.post('/album/review/:id', async (request, response) => {
 app.post('/album/comment/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    
+
     const { userId, userName, commentOne } = request.body;
     if (!userId || !commentOne) {
       return response.status(400).send({
@@ -434,10 +434,11 @@ app.post('/album/comment/:id', async (request, response) => {
 
     const newComment = {
       user_id: userId,
-      user:userName,
+      user: userName,
       comment: commentOne,
     };
-    const comments = await Review.updateOne({_id:id}, {$push: {"comments":newComment}});
+
+    const comments = await Review.updateOne({ _id: id }, { $push: { "comments": newComment } });
 
     return response.status(201).send(comments);
 
@@ -448,6 +449,28 @@ app.post('/album/comment/:id', async (request, response) => {
 })
 
 const getAlbumReviews = async (albumId) => {
-  const reviews = await Review.find({ album_id:albumId });
-  return reviews; 
-}; 
+  const reviews = await Review.find({ album_id: albumId });
+  return reviews;
+};
+
+app.put('/review/state', async (request, response) => {
+  try {
+    const { value, reviewId } = request.body;
+    
+    if (value == null || !reviewId) {
+      return response.status(400).send({
+        message: 'Send all the required fields.',
+      });
+    }
+
+    const result = await Review.findOneAndUpdate({ _id: reviewId }, { canComment: value });
+    if (result.matchedCount === 0) {
+      return response.status(404).send({ message: 'Review not found' })
+    }
+
+    return response.status(201).send(result)
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ message: error.message });
+  }
+}) 

@@ -26,6 +26,11 @@ const reviewSchema = new mongoose.Schema(
             type: Number,
             required: false,
         },
+        canComment:{
+            type: Number,
+            required: true,
+            default: 0, // can comment on default
+        },
         comments: [{
             user_id: {
                 type: String,
