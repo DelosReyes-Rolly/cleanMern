@@ -1,7 +1,7 @@
 import React from 'react';
 import { isAuthenticated, signout } from '../Backend.js';
 import { useNavigate } from 'react-router-dom';
-import HomeOne from '../pages/HomeOne.jsx';
+import HomeOne from '../pages/UsersPage/UserPage.jsx';
 import Signin from './Signin.jsx';
 
 const Dashboard = () => {
@@ -17,11 +17,10 @@ const Dashboard = () => {
 
     return (
         !authenticatedUser ? <Signin /> :
-            authenticatedUser.user.user_type === 1 ? <HomeOne /> :
-                <div className='dashboard'>
-                    <button onClick={onSignout}>Sign Out</button>
-                    <h1>Hello, {authenticatedUser.user.name}</h1> {/* Display user's name */}
-                </div>
+            <div className='dashboard'>
+                <button onClick={onSignout}>Sign Out</button>
+                <h1>Hello, {authenticatedUser.user.name}</h1> {/* Display user's name */}
+            </div>
     );
 };
 

@@ -6,12 +6,15 @@ import { CiSearch } from "react-icons/ci";
 import { LuLibrary } from "react-icons/lu";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdOutlineStarBorder } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { isAuthenticated } from '../Backend';
 
 const SidebarA = () => {
     const sidebarIcon = { color: "white", fontSize: "2em" }
     const [collapsed, setCollapsed] = React.useState(false);
     const [toggled, setToggled] = React.useState(false);
     const [broken, setBroken] = React.useState(false);
+    const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
     return (
         <div>
             <Sidebar
@@ -50,7 +53,9 @@ const SidebarA = () => {
                     <MenuItem active={location.pathname === '/' } icon={<GoHome style={sidebarIcon} />} component={<Link to={"/"} style={{ margin: '40px 10px 0px' }} />}>Home</MenuItem>
                     <MenuItem active={location.pathname === '/search'} icon={<CiSearch style={sidebarIcon}/>} component={<Link to={"/search"} style={{ margin: '0px 10px' }}/>}>Search</MenuItem>
                     <MenuItem icon={<LuLibrary style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Library</MenuItem>
-                    <MenuItem icon={<MdOutlineStarBorder style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Popular</MenuItem>
+                    {authenticatedUser.user.user_type === 0 ? 
+                    <MenuItem active={location.pathname === '/users' } icon={<FaUsers style={sidebarIcon} />} component={<Link to={"/users"} style={{ margin: '0px 10px' }} />}>Users</MenuItem>
+                     : ''}
                 </Menu>
             </Sidebar>
             <div>

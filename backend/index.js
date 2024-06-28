@@ -10,6 +10,7 @@ import querystring from 'querystring';
 import NodeCache from "node-cache";
 import { User } from "./models/UserModel.js";
 import { Review } from "./models/ReviewModel.js";
+import usersRoute from './routes/usersRoute.js';
 const app = express();
 
 const client_id = '6b31feeaaaa04c539545cc62a5f20fde';
@@ -474,3 +475,5 @@ app.put('/review/state', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 }) 
+
+app.use('/users', usersRoute);
