@@ -11,9 +11,6 @@ import Signup from './components/Signup'
 import Profile from './pages/Profile'
 import Settings from './pages/Settings'
 import UserPage from './pages/UsersPage/UserPage'
-import ShowUser from './pages/UsersPage/ShowUser'
-import EditUser from './pages/UsersPage/EditUser'
-import DeleteUser from './pages/UsersPage/DeleteUser'
 const App = () => {
 
   return (
@@ -32,9 +29,6 @@ const App = () => {
 
         {/* for Users */}
         <Route path="/users" element={<UserPage />} />
-        <Route path='/users/details/:id' element={<ShowUser />} />
-        <Route path='/users/edit/:id' element={<EditUser />} />
-        <Route path='/users/delete/:id' element={<DeleteUser />} />
       </Routes>
     </React.StrictMode>
   )

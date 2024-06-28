@@ -71,8 +71,8 @@ export function Signin() {
 
     return (
         success ? <Home /> :
-            <div style={{ background: '#282424', height: '100vh' }}>
-                <div className='grid h-screen place-items-center text-white'>
+            <div style={{ background: '#282424'}}>
+                <div className='grid min-h-screen place-items-center text-white'>
                     <div className='rounded-lg hover:shadow-xl w-2/4 p-10' style={{ backgroundColor: "#100c0c" }}>
                         <h2 className='text-center text-4xl font-bold mb-6'>Sign In</h2>
                         {loadingMessage()}

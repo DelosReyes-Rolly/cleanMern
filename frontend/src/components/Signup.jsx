@@ -74,7 +74,7 @@ function Signup() {
 
     return (
         <div style={{ background: '#282424' }} className="text-white">
-            <div className='grid h-screen place-items-center'>
+            <div className='grid min-h-screen place-items-center'>
                 <div className='rounded-lg hover:shadow-xl w-1/2 p-10' style={{ backgroundColor: "#100c0c" }}>
                     <h2 className='text-center text-4xl font-bold mb-6'>Create an account</h2>
                     {errorMessage()}

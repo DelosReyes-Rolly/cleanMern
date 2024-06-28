@@ -38,7 +38,7 @@ const Search = () => {
     const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
     return (
         !authenticatedUser ? <Signin /> :
-            <div style={{ background: '#282424' }}>
+            <div style={{ background: '#282424' }} className='min-h-screen'>
                 <SidebarA />
                 <div className="leftBody" style={{ color: 'white' }}>
                     <Dropdown />
