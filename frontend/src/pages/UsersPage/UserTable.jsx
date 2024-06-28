@@ -40,7 +40,7 @@ const UserTable = ({ users }) => {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                                                 {user.email}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            <td className="flex px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                                                 <button className='flex items-stretch p-2 mr-2 bg-indigo-600 rounded-lg hover:bg-indigo-800' onClick={() => setShowUsersModal(true)}>
                                                     <BsInfoCircle className="text-2xl cursor-pointer" />
                                                 </button>
