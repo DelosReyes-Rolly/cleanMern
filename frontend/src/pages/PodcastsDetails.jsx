@@ -51,13 +51,13 @@ const PodcastsDetails = () => {
                         </div>
                     </div>
                     <div className='border-grey-500 rounded-lg px-4 py-2 mb-4 relative hover:shadow-xl col-span-4'>
-                        <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>Episodes</h4>
+                        <h4 className='my-2' style={{ fontSize: '24px' }}>Episodes</h4>
                         <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
                             {podcastDetails.episodes.items.map(podcastDetail => (
                                 <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }} key={podcastDetail.id}>
                                     {/* <Link to={`/album/${podcastDetail.id}`}> */}
                                     <img src={podcastDetail.images[0].url} alt={podcastDetail.name}></img>
-                                    <h4 className='my-2' style={{ fontFamily: 'Arial', fontSize: '24px' }}>{podcastDetail.name}</h4>
+                                    <h4 className='my-2' style={{ fontWeight: '400' }}>{podcastDetail.name}</h4>
                                     <div className='flex justify-start items-center gap-x-2'>
                                         <h2 className='my-1' style={{ color: '#D6C4C4' }}>{podcastDetail.release_date}</h2>
                                     </div>

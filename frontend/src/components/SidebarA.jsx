@@ -52,7 +52,7 @@ const SidebarA = () => {
                 >
                     <MenuItem active={location.pathname === '/' } icon={<GoHome style={sidebarIcon} />} component={<Link to={"/"} style={{ margin: '40px 10px 0px' }} />}>Home</MenuItem>
                     <MenuItem active={location.pathname === '/search'} icon={<CiSearch style={sidebarIcon}/>} component={<Link to={"/search"} style={{ margin: '0px 10px' }}/>}>Search</MenuItem>
-                    <MenuItem icon={<LuLibrary style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Library</MenuItem>
+                    {/* <MenuItem icon={<LuLibrary style={sidebarIcon} /> }  component={<Link to={"/"} style={{ margin: '0px 10px' }}/>}>Library</MenuItem> */}
                     {authenticatedUser.user.user_type === 0 ? 
                     <MenuItem active={location.pathname === '/users' } icon={<FaUsers style={sidebarIcon} />} component={<Link to={"/users"} style={{ margin: '0px 10px' }} />}>Users</MenuItem>
                      : ''}

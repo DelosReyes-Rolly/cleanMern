@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import '../screen.css';
 import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-const ArtistsWithData = ({ artistSearch }) => {
-    const [artists, setArtists] = useState([]);
+const ArtistRelated = () => {
+    const [artistRelated, setArtistRelated] = useState(null);
+    const { id } = useParams();
 
     useEffect(() => {
-        const fetchArtistsData = async () => {
+        const fetchArtistRelated = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artists?q=${artistSearch}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const response = await fetch(`http://localhost:3000/api/artist/related/${id}`)
                 const data = await response.json();
-                setArtists(data);
-                console.log(data)
+                setArtistRelated(data.artistRelated);
             } catch (error) {
-                console.error('Error fetching artists data:', error);
+                console.log('Error fetching artist data: ', error);
             }
         };
 
-        fetchArtistsData();
-    }, [artistSearch]);
-    if (!artists) return <Loading />;
+        fetchArtistRelated();
+    }, [id]);
+
+    if (!artistRelated) return <Loading />;
     return (
         <div>
             <div style={{ paddingTop: '40px' }}>
                 <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
-                    {artists.map(artist => (
+                    {artistRelated.map(artist => (
                         <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relative hover:bg-gray-600' key={artist.id}>
                             <Link to={`/artist/${artist.id}`}>
                                 <img className='rounded-full' src={artist.images[0].url} alt={artist.name}></img>
@@ -42,10 +40,4 @@ const ArtistsWithData = ({ artistSearch }) => {
     )
 }
 
-const Artists = () => {
-    return (
-        <div><ArtistsWithData artistSearch='best singer' /></div>
-    )
-}
-
-export default Artists
+export default ArtistRelated

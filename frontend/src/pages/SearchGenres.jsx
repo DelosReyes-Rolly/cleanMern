@@ -22,13 +22,13 @@ const SearchGenres = () => {
 
     if (genres.length === 0) return <Loading />;
     return (
-        <div>
-            <h1 style={{ fontFamily: 'Arial', fontSize: '26px' }}>Browse All</h1>
-            <div className='grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4'>
+        <div style={{ paddingTop: '20px' }}>
+            <h1 style={{ fontSize: '26px' }}>Browse All Genres</h1><br />
+            <div className='grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6'>
                 {genres.map(genre => (
-                    <div className='rounded-lg px-6 pt-4 pb-20 m-4 relative hover:shadow-xl' style={{ backgroundColor: "#" + Math.random().toString(16).substr(-6) }} key={genre}>
+                    <div className='rounded-lg px-6 pt-4 pb-6 m-4 relative hover:shadow-xl  ' style={{ backgroundColor: 'hsl(' + Math.random() * 360 + ', 80%, 40%)' }} key={genre}>
                         <Link to={`/albums/${genre}`}>
-                            <h1 style={{ textTransform: 'capitalize', fontSize: '28px', fontWeight: 'bold', fontFamily: 'Sans-serif' }}>{genre}</h1>
+                            <h1 style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>{genre}</h1>
                         </Link>
                     </div>
                 ))}

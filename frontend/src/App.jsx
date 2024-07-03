@@ -11,6 +11,9 @@ import Signup from './components/Signup'
 import Profile from './pages/Profile'
 import Settings from './pages/Settings'
 import UserPage from './pages/UsersPage/UserPage'
+import ArtistRelated from './pages/ArtistRelated'
+import ArtistAlbums from './pages/ArtistAlbums'
+import ArtistSingles from './pages/ArtistSingles'
 const App = () => {
 
   return (
@@ -26,7 +29,9 @@ const App = () => {
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='/profile' element={<Profile />} />
         <Route exact path='/settings' element={<Settings />} />
-
+        <Route path="/artist/related/:id" element={<ArtistRelated />} />
+        <Route path="/artist/albums:id" element={<ArtistAlbums />} />
+        <Route path="/artist/singles:id" element={<ArtistSingles />} />
         {/* for Users */}
         <Route path="/users" element={<UserPage />} />
       </Routes>

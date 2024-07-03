@@ -77,7 +77,7 @@ app.get('/api/podcasts', async (req, res) => {
   try {
     const token = await getAccessToken();
     const query = req.query.q || 'podcast';
-    const search_url = `https://api.spotify.com/v1/search?query=${encodeURIComponent(query)}&type=show&market=PH&locale=en-US&limit=20`;
+    const search_url = `https://api.spotify.com/v1/search?query=${encodeURIComponent(query)}&type=show&market=PH&locale=en-US&limit=18`;
 
     const searchResponse = await axios.get(search_url, {
       headers: {
@@ -95,7 +95,7 @@ app.get('/api/artists', async (req, res) => {
   try {
     const token = await getAccessToken();
     const query = req.query.q || 'best singer';
-    const search_url = `https://api.spotify.com/v1/search?query=${encodeURIComponent(query)}&type=artist&locale=en-US&limit=20`;
+    const search_url = `https://api.spotify.com/v1/search?query=${encodeURIComponent(query)}&type=artist&locale=en-US&limit=18`;
 
     const searchResponse = await axios.get(search_url, {
       headers: {
@@ -114,7 +114,7 @@ app.get('/api/search/albums', async (req, res) => {
   try {
     const token = await getAccessToken();
     const query = req.query.q || 'best albums';
-    const search_url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=album&limit=20`;
+    const search_url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=album&limit=18`;
 
     const searchResponse = await axios.get(search_url, {
       headers: {
@@ -127,6 +127,7 @@ app.get('/api/search/albums', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.get('/api/genres', async (req, res) => {
   let genres = genresCache.get('genres');
@@ -156,7 +157,7 @@ app.get('/api/albums/genre/:genre', async (req, res) => {
   try {
     const token = await getAccessToken();
     const genre = req.params.genre;
-    const search_url = `https://api.spotify.com/v1/search?q=genre:${encodeURIComponent(genre)}&type=album&limit=20`;
+    const search_url = `https://api.spotify.com/v1/search?q=genre:${encodeURIComponent(genre)}&type=album&limit=18`;
 
     const fetchAlbums = async (retries = 3) => {
       try {
@@ -247,12 +248,12 @@ app.get('/api/artist/:id', async (req, res) => {
   }
 });
 
-// fetch artist details
+// fetch artist albums
 app.get('/api/artist/albums/:id', async (req, res) => {
   try {
     const token = await getAccessToken();
     const artist_id = req.params.id;
-    const artistAlbums_url = `https://api.spotify.com/v1/artists/${artist_id}/albums`;
+    const artistAlbums_url = `https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=album`;
 
     const artistAlbumsResponse = await axios.get(artistAlbums_url, {
       headers: {
@@ -264,6 +265,30 @@ app.get('/api/artist/albums/:id', async (req, res) => {
 
     res.json({
       artistAlbums: artistAlbumsData,
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// fetch artist singles
+app.get('/api/artist/singles/:id', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const artist_id = req.params.id;
+    const artistSingles_url = `https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=single`;
+
+    const artistSinglesResponse = await axios.get(artistSingles_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const artistSinglesData = artistSinglesResponse.data;
+
+    res.json({
+      artistSingles: artistSinglesData,
     });
 
   } catch (error) {
@@ -457,7 +482,7 @@ const getAlbumReviews = async (albumId) => {
 app.put('/review/state', async (request, response) => {
   try {
     const { value, reviewId } = request.body;
-    
+
     if (value == null || !reviewId) {
       return response.status(400).send({
         message: 'Send all the required fields.',
@@ -474,6 +499,23 @@ app.put('/review/state', async (request, response) => {
     console.log(error);
     response.status(500).send({ message: error.message });
   }
-}) 
+})
+
+app.get('/api/newreleases', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const search_url = `https://api.spotify.com/v1/browse/new-releases?limit=18`;
+
+    const searchResponse = await axios.get(search_url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    res.json(searchResponse.data.albums.items);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.use('/users', usersRoute);
