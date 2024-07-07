@@ -301,6 +301,7 @@ app.get('/api/artist/related/:id', async (req, res) => {
   try {
     const token = await getAccessToken();
     const artist_id = req.params.id;
+
     const artistRelated_url = `https://api.spotify.com/v1/artists/${artist_id}/related-artists`;
 
     const artistRelatedResponse = await axios.get(artistRelated_url, {

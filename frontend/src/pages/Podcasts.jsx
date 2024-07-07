@@ -34,13 +34,12 @@ const PodcastsWithData = ({ podcastSearch }) => {
                     <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }} key={podcast.id}>
                         <Link to={`/podcast/${podcast.id}`}>
                             <img style={{ borderRadius: '6px', marginTop: '4%' }} src={podcast.images[0].url} alt={podcast.name}></img>
-                            <h4 className='my-2 title' style={{ fontWeight: '400' }}>{podcast.name}</h4>
-                            <div className='flex justify-start items-center gap-x-2 title'>
-                                <h2 className='' style={{ color: '#D6C4C4' }}>{podcast.publisher}</h2>
-                            </div>
-                            <br/>
+                            <h4 className='my-4 title' style={{ fontWeight: '400' }}>{podcast.name}</h4>
                             <div className='flex justify-start items-center gap-x-2'>
-                                <h2 className='my-1' style={{ color: '#D6C4C4' }}>Episodes: {podcast.total_episodes}</h2>
+                                <h2 className='title' style={{ color: '#D6C4C4' }}>{podcast.publisher}</h2>
+                            </div>
+                            <div className='flex justify-start items-center gap-x-2'>
+                                <h2 className='' style={{ color: '#D6C4C4' }}>Episodes: {podcast.total_episodes}</h2>
                             </div>
                         </Link>
                     </div>

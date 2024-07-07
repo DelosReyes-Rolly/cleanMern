@@ -5,53 +5,62 @@ import { isAuthenticated } from '../../Backend';
 import { AiOutlineClose } from 'react-icons/ai'
 
 const ShowUser = ({ user, onClose }) => {
-    const { id } = useParams();
     const [loading, setLoading] = useState(false);
-    const authenticatedUser = isAuthenticated();
+    let userTypeString = '';
+    if (user.user_type == 0) {
+        userTypeString = 'Admin'
+    } else {
+        userTypeString = 'User'
+    }
+
+    function getDate(date) {
+        let today = new Date(date);
+        return new Intl.DateTimeFormat('en-US', { month: 'long', date: 'numeric', year: 'numeric' }).format(today);
+    }
     return (
+        <div
+            className='fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-40 flex justify-center items-center'
+            onClick={onClose}>
             <div
-                className='fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center'
-                onClick={onClose}>
-                <div
-                    onClick={(event) => event.stopPropagation()}
-                    className='w-[600px] max-w-full h-[400px] bg-black rounded-xl p-4 flex flex-col relative'>
-                    <AiOutlineClose
-                        className='absolute right-6 top-6 text-2xl text-red-600 cursor-pointer'
-                        onClick={onClose}
-                    />
-                    <h1 className='text-3xl my-4'>Show User</h1>
-                    {loading ? (
-                        <Loading />
-                    ) : (
-                        <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>Id</span>
-                                <span>{user._id}</span>
-                            </div>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>Name</span>
-                                <span>{user.name}</span>
-                            </div>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>Email</span>
-                                <span>{user.email}</span>
-                            </div>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-                                <span>{user.createdAt}</span>
-                            </div>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>User Type</span>
-                                <span>{user.user_type}</span>
-                            </div>
-                            <div className='my-4'>
-                                <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
-                                <span>{user.updatedAt}</span>
-                            </div>
+                onClick={(event) => event.stopPropagation()}
+                className='w-[800px] max-w-full h-[400px] bg-gray-600 rounded-xl p-4 flex flex-col relative sm:h-[800px]'>
+                <AiOutlineClose
+                    className='absolute right-6 top-6 text-2xl text-red-600 cursor-pointer'
+                    onClick={onClose}
+                />
+                <h1 className='text-2xl my-4 border-b-2 border-gray-800 pb-2'>Show User</h1>
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <div className='grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2'>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>ID: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{user._id}</div>
                         </div>
-                    )}
-                </div>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>Name: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{user.name}</div>
+                        </div>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>Email: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{user.email}</div>
+                        </div>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>Created At: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{getDate(user.createdAt)}</div>
+                        </div>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>User Type: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{userTypeString}</div>
+                        </div>
+                        <div className='my-2 pl-4 pr-2'>
+                            <div className='text-xl mr-4 text-white'>Updated At: </div>
+                            <div className='w-full border-b-4 rounded-lg outline-none border-blue-600 text-white p-2 mb-4 bg-gray-800'>{getDate(user.updatedAt)}</div>
+                        </div>
+                    </div>
+                )}
             </div>
+        </div>
     )
 }
 

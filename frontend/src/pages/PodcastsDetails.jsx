@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import SidebarA from '../components/SidebarA';
 import Dropdown from '../components/Dropdown';
 import Signin from '../components/Signin';
 import { isAuthenticated } from '../Backend';
-import HomeOne from './UsersPage/UserPage';
 
 const PodcastsDetails = () => {
     const [podcastDetails, setPodcastDetails] = useState(null);
     const { id } = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPodcastDetailsData = async () => {
@@ -29,6 +27,10 @@ const PodcastsDetails = () => {
 
     const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
 
+    function getDate(date) {
+        let today = new Date(date);
+        return new Intl.DateTimeFormat('en-US', { month: 'long', day: "numeric", year: 'numeric' }).format(today);
+    }
     if (!podcastDetails) return (<Loading />)
     return (
         !authenticatedUser ? <Signin /> :
@@ -59,7 +61,7 @@ const PodcastsDetails = () => {
                                     <img src={podcastDetail.images[0].url} alt={podcastDetail.name}></img>
                                     <h4 className='my-2' style={{ fontWeight: '400' }}>{podcastDetail.name}</h4>
                                     <div className='flex justify-start items-center gap-x-2'>
-                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{podcastDetail.release_date}</h2>
+                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{getDate(podcastDetail.release_date)}</h2>
                                     </div>
                                     {/* </Link> */}
                                 </div>

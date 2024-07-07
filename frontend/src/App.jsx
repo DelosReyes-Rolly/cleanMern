@@ -29,9 +29,9 @@ const App = () => {
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='/profile' element={<Profile />} />
         <Route exact path='/settings' element={<Settings />} />
-        <Route path="/artist/related/:id" element={<ArtistRelated />} />
-        <Route path="/artist/albums:id" element={<ArtistAlbums />} />
-        <Route path="/artist/singles:id" element={<ArtistSingles />} />
+        <Route path="/artist/related/:id/:artist" element={<ArtistRelated />} />
+        <Route path="/artist/albums/:id/:artist" element={<ArtistAlbums />} />
+        <Route path="/artist/singles/:id/:artist" element={<ArtistSingles />} />
         {/* for Users */}
         <Route path="/users" element={<UserPage />} />
       </Routes>

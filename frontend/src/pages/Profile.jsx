@@ -6,7 +6,7 @@ import Signin from '../components/Signin.jsx'
 import { useSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import HomeOne from './UsersPage/UserPage.jsx';
+
 const Profile = () => {
     const authenticatedUser = isAuthenticated(); // Check if the user is authenticated
     const [name, setName] = useState('');

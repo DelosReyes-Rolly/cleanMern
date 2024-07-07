@@ -98,6 +98,11 @@ const AlbumDetails = () => {
 
   if (!album || !tracks) return <Loading />;
 
+  function getDate(date) {
+    let today = new Date(date);
+    return new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
+  }
+
   return (
     <div style={{ background: '#282424' }} className='min-h-screen'>
       <SidebarA />
@@ -111,7 +116,7 @@ const AlbumDetails = () => {
                 <img src={album.images[1].url} alt={album.name} />
               </div>
               <div className='pt-48 pl-4'>
-                <h1 style={{ fontSize: '12px' }}>{album.release_date}</h1>
+                <h1 style={{ fontSize: '12px' }}>{getDate(album.release_date)}</h1>
                 <h1 style={{ fontSize: '40px', fontWeight: 'bold' }}>{album.name}</h1>
                 <h2 style={{ fontSize: '20px' }}>{album.artists.map(artist => artist.name).join(', ')}</h2>
                 <div className='flex items-stretch'>

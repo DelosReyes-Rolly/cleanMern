@@ -80,6 +80,11 @@ const ArtistsDetails = () => {
         fetchArtistRelated();
     }, [id]);
 
+    function getDate(date) {
+        let today = new Date(date);
+        return new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
+    }
+
     if (!artistRelated || !artistAlbums || !artist || !artistSingles) return <Loading />
 
     return (
@@ -104,7 +109,7 @@ const ArtistsDetails = () => {
                 </div>
                 <div className='border-grey-500 rounded-lg px-4 py-2 relative hover:shadow-xl col-span-4'>
                     <h4 className='my-2' style={{ fontSize: '24px' }}>Singles</h4>
-                    <Link to={`/artist/albums/${id}`} className={singleLimit ? 'float-right' : 'hidden'}>
+                    <Link to={`/artist/singles/${id}/${artist.name}`} className={singleLimit ? 'float-right' : 'hidden'}>
                         Show all
                     </Link>
                     <br />
@@ -115,7 +120,7 @@ const ArtistsDetails = () => {
                                     <img style={{ borderRadius: '6px', marginTop: '4%' }} src={artistSingle.images[0].url} alt={artistSingle.name}></img>
                                     <h4 className='my-2 title' style={{ fontWeight: '400' }}>{artistSingle.name}</h4>
                                     <div className='flex justify-start items-center gap-x-2'>
-                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{artistSingle.release_date}</h2>
+                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{getDate(artistSingle.release_date)}</h2>
                                     </div>
                                 </Link>
                             </div>
@@ -124,7 +129,7 @@ const ArtistsDetails = () => {
                     </div>
                     <br /><br /><br /><br />
                     <h4 className='my-2' style={{ fontSize: '24px' }}>Albums</h4>
-                    <Link to={`/artist/albums/${id}`} className={albumLimit ? 'float-right' : 'hidden'}>
+                    <Link to={`/artist/albums/${id}/${artist.name}`} className={albumLimit ? 'float-right' : 'hidden'}>
                         Show all
                     </Link>
                     <br />
@@ -135,7 +140,7 @@ const ArtistsDetails = () => {
                                     <img style={{ borderRadius: '6px', marginTop: '4%' }} src={artistAlbum.images[0].url} alt={artistAlbum.name}></img>
                                     <h4 className='my-2 title' style={{ fontWeight: '400' }}>{artistAlbum.name}</h4>
                                     <div className='flex justify-start items-center gap-x-2'>
-                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{artistAlbum.release_date}</h2>
+                                        <h2 className='my-1' style={{ color: '#D6C4C4' }}>{getDate(artistAlbum.release_date)}</h2>
                                     </div>
                                 </Link>
                             </div>
@@ -143,7 +148,7 @@ const ArtistsDetails = () => {
                     </div>
                     <br /><br /><br /><br />
                     <h4 className='my-2' style={{ fontSize: '24px' }}>Related Artists</h4>
-                    <Link to={`/artist/related/${id}`} className={artistLimit ? 'float-right' : 'hidden'}>
+                    <Link to={`/artist/related/${id}/${artist.name}`} className={artistLimit ? 'float-right' : 'hidden'}>
                         Show all
                     </Link>
                     <br />

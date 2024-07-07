@@ -35,12 +35,15 @@ const UserPage = () => {
           <div className='pt-20 top-6 px-4 py-1'></div>
           <div style={{ paddingTop: '40px' }}>
             <div className='justify-between items-center'>
-              <h1 className='text-3xl my-8'>Users List</h1>
-              {loading ? (
-                <Loading />
-              ) : (
-                <UserTable users={users} />
-              )}
+              <div className='border-grey-500 rounded-lg px-4 py-2 m-4 relatice hover:shadow-xl' style={{ backgroundColor: "#100c0c" }}>
+                <h1 className='text-3xl border-b-2 border-gray-800 pt-4 pb-2'>Users List</h1>
+                <br/>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <UserTable users={users} />
+                )}
+              </div>
             </div>
           </div>
         </div>
