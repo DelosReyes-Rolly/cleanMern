@@ -1,15 +1,16 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .leftBody{
+    .leftBody {
         margin-left: 0px;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .leftBody{
+    .leftBody {
         margin-left: 0px;
     }
+
     .title {
         overflow: hidden;
         white-space: nowrap;
@@ -19,10 +20,11 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .leftBody{
+    .leftBody {
         margin-left: 280px;
     }
-    .artistAlbumBlock{
+
+    .artistAlbumBlock {
         margin-left: -40px !important;
         margin-top: -20px !important;
         padding-left: 40px;
@@ -31,10 +33,11 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .leftBody{
+    .leftBody {
         margin-left: 280px;
     }
-    .artistAlbumBlock{
+
+    .artistAlbumBlock {
         margin-left: -40px !important;
         margin-top: -20px !important;
         padding-left: 40px;
@@ -43,12 +46,35 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .leftBody{
+    .leftBody {
         margin-left: 280px;
     }
-    .artistAlbumBlock{
+
+    .artistAlbumBlock {
         margin-left: -40px !important;
         margin-top: -20px !important;
         padding-left: 40px;
     }
+}
+
+.welcome-hero {
+    position: relative;
+    height: 428px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#myVideo {
+    width: 78%;
+    height: 406px;
+    position: absolute;
+    margin-top: -20px !important;
+}
+
+.divider {
+    margin-left: -28px
+}
+
+.img-detail{
+    border-radius: 6%;
+    box-shadow: 2px 2px 4px rgba(0.6, 0.6, 0.6, 0.6);
 }

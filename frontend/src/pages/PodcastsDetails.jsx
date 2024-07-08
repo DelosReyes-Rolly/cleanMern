@@ -38,11 +38,13 @@ const PodcastsDetails = () => {
                 <SidebarA />
                 <div className="leftBody" style={{ color: 'white' }}>
                     <Dropdown />
-                    <div style={{ background: '#404040' }} className='artistAlbumBlock'>
-                        <div style={{ paddingTop: '40px' }}>
-                            <div className='pb-10' style={{ display: 'flex' }}>
+                    <br/>
+                    <div style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(${podcastDetails.images[1].url})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', filter: 'blur(24px)' }} id="myVideo"></div>
+                    <div className='artistAlbumBlock welcome-hero'>
+                        <div style={{ paddingTop: '80px' }}>
+                            <div className='my-8 pb-10' style={{ display: 'flex' }}>
                                 <div>
-                                    <img src={podcastDetails.images[1].url} alt={podcastDetails.name} />
+                                    <img src={podcastDetails.images[1].url} alt={podcastDetails.name} className='img-detail'/>
                                 </div>
                                 <div className='pt-48 pl-4'>
                                     <h1 style={{ fontSize: '12px' }}>{podcastDetails.release_date}</h1>
@@ -52,6 +54,7 @@ const PodcastsDetails = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='border-t-2 border-gray-800 divider'></div><br />
                     <div className='border-grey-500 rounded-lg px-4 py-2 mb-4 relative hover:shadow-xl col-span-4'>
                         <h4 className='my-2' style={{ fontSize: '24px' }}>Episodes</h4>
                         <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
