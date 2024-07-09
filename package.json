@@ -5,5 +5,20 @@
     "@mui/material": "^5.15.20",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6"
-  }
+  },
+  "name": "newmern",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && node app.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
