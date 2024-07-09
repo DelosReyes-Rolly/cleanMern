@@ -1,5 +1,5 @@
 
-Music review with Social Media like interaction:
+Music review with Social Media like interaction
 
 Future things to do:
 
@@ -7,20 +7,34 @@ Future things to do:
  - Can like and dislike reviews (if possible, comment too).
 
 
-Things to do:
+STARTED: June 13, 2024
 
- - Database Structure
- - Api (for getting music data)
- - Flow
+VERSION 1: COMPLETED - July 9, 2024
 
-System Flow:
+ - Database Structured
+ - API (Spotify Api)
+ - System Features:
+    * 2 users - Admin (0) and User (1)
+    * Admin 
+      = Can crud users.
+      = Can do what users can.
+    * User
+      = Can leave a review.
+      = Can comment on review.
+      = Can disable comment on review.
+      = Has a profile.
 
- * 2 users - Admin and user
- * Admin
-    - Can crud users and reviews.
-    - Can enable and disable comments and reviews
- * Users
-    - Can leave review.
-    - Can comment on review.
-    - Can diasble comment on their reviews.
-    - Can have profile.
+
+VERSION 2: FOR PLANNING
+  - Issues to be resolved:
+    * Undynamic reviewing and commenting.
+    * Star system not available.
+    * Bugs and undynamic UI.
+    * Refix the overall UI.
+
+  - Additional Features:
+    * Users can crud their comments and reviews.
+    * Limit the reviews and comments of users.
+      = 1 review per album and 2 comments per review each users.
+    * Make a landing page, not only login on first page.
+ 
