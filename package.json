@@ -15,7 +15,7 @@
     "start-server": "cd backend && node index.js",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
-    "start-client": "cd client && npm run dev"
+    "start-client": "cd client && npm run vite"
   },
   "keywords": [],
   "author": "",
