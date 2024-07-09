@@ -5,7 +5,7 @@ import axios from 'axios';
 //SIGNIN
 export const signin = ( user ) => {
     // API call to sign in a user
-    return axios.post("http://localhost:3000/api/signin", JSON.stringify(user), {
+    return axios.post("https://music-review.onrender.com/api/signin", JSON.stringify(user), {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
@@ -22,7 +22,7 @@ export const signin = ( user ) => {
 //SIGNUP
 export const signup = ( user ) => {
     // API call to sign up a user
-    return axios.post("http://localhost:3000/api/signup", JSON.stringify(user),{
+    return axios.post("https://music-review.onrender.com/api/signup", JSON.stringify(user),{
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export const signout = (next) => {
     if (typeof window !== "undefined") {
         localStorage.removeItem("jwt");
 
-        axios.get("http://localhost:3000/api/signout")
+        axios.get("https://music-review.onrender.com/api/signout")
         .then(response => {
             console.log(response.data); 
             next(); 

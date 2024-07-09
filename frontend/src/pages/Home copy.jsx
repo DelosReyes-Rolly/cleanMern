@@ -12,7 +12,7 @@ const Home = () => {
   const searchAlbums = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/api/search/albums?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`https://music-review.onrender.com/api/search/albums?q=${encodeURIComponent(query)}`);
       const data = await response.json();
       setAlbums(data);
     } catch (error) {

@@ -11,7 +11,7 @@ const DeleteUser = ({ user, onClose }) => {
     const [loading, setLoading] = useState(false);
     const handleDeleteUser = () => {
         axios
-            .delete(`http://localhost:3000/users/${user._id}`)
+            .delete(`https://music-review.onrender.com/users/${user._id}`)
             .then((response) => {
                 setLoading(false);
                 enqueueSnackbar('User Deleted Successfully', { variant: 'suceess' });

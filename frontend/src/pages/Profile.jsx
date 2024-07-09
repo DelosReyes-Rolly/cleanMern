@@ -22,7 +22,7 @@ const Profile = () => {
         };
         console.log(data);
         axios
-            .put(`http://localhost:3000/edit/profile/${authenticatedUser.user._id}`, data)
+            .put(`https://music-review.onrender.com/edit/profile/${authenticatedUser.user._id}`, data)
             .then(() => {
                 enqueueSnackbar('Profile Edited Successfully', { variant: 'suceess' });
                 navigate('/profile');

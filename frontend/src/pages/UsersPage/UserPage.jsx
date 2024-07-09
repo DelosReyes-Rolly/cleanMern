@@ -15,7 +15,7 @@ const UserPage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:3000/users')
+      .get('https://music-review.onrender.com/users')
       .then((response) => {
         setUsers(response.data.data);
         setLoading(false);

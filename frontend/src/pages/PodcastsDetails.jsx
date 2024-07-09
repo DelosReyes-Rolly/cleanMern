@@ -13,7 +13,7 @@ const PodcastsDetails = () => {
     useEffect(() => {
         const fetchPodcastDetailsData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/podcasts/details/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/podcasts/details/${id}`)
                 const data = await response.json();
                 setPodcastDetails(data.podcastDetails);
                 console.log(data);

@@ -8,7 +8,7 @@ const SearchGenres = () => {
     useEffect(() => {
         const fetchGenres = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/genres`);
+                const response = await fetch(`https://music-review.onrender.com/api/genres`);
                 const data = await response.json();
                 setGenres(data);
                 console.log(data);

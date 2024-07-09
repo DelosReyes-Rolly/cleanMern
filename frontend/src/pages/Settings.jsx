@@ -21,13 +21,13 @@ const Settings = () => {
         };
         console.log(data);
         axios
-            .post(`http://localhost:3000/check/password/${id}`, data)
+            .post(`https://music-review.onrender.com/check/password/${id}`, data)
             .then(() => {
                 signout();
                 console.log("Signed out");
                 navigate('/');
                 axios
-                    .delete(`http://localhost:3000/delete/profile/${id}`)
+                    .delete(`https://music-review.onrender.com/delete/profile/${id}`)
                     .then((response) => {
                         enqueueSnackbar('Profile Deleted Successfully', { variant: 'suceess' });
                     })

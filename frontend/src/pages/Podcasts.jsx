@@ -11,7 +11,7 @@ const PodcastsWithData = ({ podcastSearch }) => {
     useEffect(() => {
         const fetchPodcastData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/podcasts?q=${podcastSearch}`);
+                const response = await fetch(`https://music-review.onrender.com/api/podcasts?q=${podcastSearch}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

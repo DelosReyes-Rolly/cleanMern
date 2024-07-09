@@ -20,7 +20,7 @@ const EditUser = ({ user, onClose }) => {
         };
         console.log(data);
         axios
-            .put(`http://localhost:3000/users/${user._id}`, data)
+            .put(`https://music-review.onrender.com/users/${user._id}`, data)
             .then(() => {
                 setLoading(false);
                 enqueueSnackbar('User Edited Successfully', { variant: 'suceess' });

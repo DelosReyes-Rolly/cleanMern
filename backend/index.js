@@ -13,9 +13,12 @@ import { Review } from "./models/ReviewModel.js";
 import usersRoute from './routes/usersRoute.js';
 const app = express();
 
-app.use(express.json());
+const corsOptions = {
+  origin: "https://music-review-v1.onrender.com", // frontend URI (ReactJS)
+}
 
-app.use(cors());
+app.use(express.json());
+app.use(cors(corsOptions));
 
 // Initialize cache
 const tokenCache = new NodeCache({ stdTTL: 3600 });

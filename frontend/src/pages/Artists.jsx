@@ -9,7 +9,7 @@ const ArtistsWithData = ({ artistSearch }) => {
     useEffect(() => {
         const fetchArtistsData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artists?q=${artistSearch}`);
+                const response = await fetch(`https://music-review.onrender.com/api/artists?q=${artistSearch}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

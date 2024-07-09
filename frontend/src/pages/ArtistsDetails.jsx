@@ -18,7 +18,7 @@ const ArtistsDetails = () => {
     useEffect(() => {
         const fetchArtistsData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artist/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/artist/${id}`)
                 const data = await response.json();
                 setArtist(data.artist);
             } catch (error) {
@@ -32,7 +32,7 @@ const ArtistsDetails = () => {
     useEffect(() => {
         const fetchArtistAlbums = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artist/albums/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/artist/albums/${id}`)
                 const data = await response.json();
                 if (data.artistAlbums.items.length > 6) {
                     setAlbumLimit(true);
@@ -49,7 +49,7 @@ const ArtistsDetails = () => {
     useEffect(() => {
         const fetchArtistSingles = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artist/singles/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/artist/singles/${id}`)
                 const data = await response.json();
                 if (data.artistSingles.items.length > 6) {
                     setSingleLimit(true);
@@ -66,7 +66,7 @@ const ArtistsDetails = () => {
     useEffect(() => {
         const fetchArtistRelated = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artist/related/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/artist/related/${id}`)
                 const data = await response.json();
                 if (data.artistRelated.artists.length > 6) {
                     setArtistLimit(true);

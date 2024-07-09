@@ -10,7 +10,7 @@ const All = () => {
     useEffect(() => {
         const fetchAlbumData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/newreleases`);
+                const response = await fetch(`https://music-review.onrender.com/api/newreleases`);
                 const data = await response.json();
                 setAlbum(data);
             } catch (error) {

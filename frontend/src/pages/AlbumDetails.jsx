@@ -29,7 +29,7 @@ const AlbumDetails = () => {
   useEffect(() => {
     const fetchAlbumData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/album/${id}`);
+        const response = await fetch(`https://music-review.onrender.com/api/album/${id}`);
         const data = await response.json();
         setTracks(data.tracks);
         setReviews(data.albumReviews);
@@ -51,7 +51,7 @@ const AlbumDetails = () => {
       description,
     };
     axios
-      .post(`http://localhost:3000/album/review/${id}`, data)
+      .post(`https://music-review.onrender.com/album/review/${id}`, data)
       .then(() => {
         enqueueSnackbar('Review Submitted', { variant: 'success' });
       })
@@ -69,7 +69,7 @@ const AlbumDetails = () => {
       commentOne,
     };
     axios
-      .post(`http://localhost:3000/album/comment/${reviewId}`, data)
+      .post(`https://music-review.onrender.com/album/comment/${reviewId}`, data)
       .then(() => {
         enqueueSnackbar('Comment Submitted', { variant: 'success' });
       })
@@ -85,7 +85,7 @@ const AlbumDetails = () => {
       reviewId
     };
     axios
-      .put(`http://localhost:3000/review/state`, reviewStateData)
+      .put(`https://music-review.onrender.com/review/state`, reviewStateData)
       .then((response) => {
         enqueueSnackbar('Comment state changed', { variant: 'success' });
         console.log(response.data.canComment);

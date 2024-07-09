@@ -12,7 +12,7 @@ const ArtistRelated = () => {
     useEffect(() => {
         const fetchArtistRelated = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/artist/related/${id}`)
+                const response = await fetch(`https://music-review.onrender.com/api/artist/related/${id}`)
                 const data = await response.json();
                 setArtistRelated(data.artistRelated);
             } catch (error) {

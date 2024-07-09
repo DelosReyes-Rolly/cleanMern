@@ -14,7 +14,7 @@ const GenreAlbum = () => {
     useEffect(() => {
         const fetchAlbumsByGenre = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/albums/genre/${genre}`);
+                const response = await fetch(`https://music-review.onrender.com/api/albums/genre/${genre}`);
                 const data = await response.json();
                 setAlbums(data);
                 console.log(data);
