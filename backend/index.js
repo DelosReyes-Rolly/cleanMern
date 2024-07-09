@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import router from "./routes/AuthRoute.js";
-import { PORT, mongoDBURL } from "./config.js";
+import { PORT, mongoDBURL, client_id, client_secret } from "./config.js";
 import mongoose from "mongoose";
 import cors from 'cors';
 import axios from 'axios';
@@ -12,10 +12,6 @@ import { User } from "./models/UserModel.js";
 import { Review } from "./models/ReviewModel.js";
 import usersRoute from './routes/usersRoute.js';
 const app = express();
-
-const client_id = '6b31feeaaaa04c539545cc62a5f20fde';
-
-const client_secret = 'f304b722429d4fb2bc83e4408c941b24';
 
 app.use(express.json());
 
